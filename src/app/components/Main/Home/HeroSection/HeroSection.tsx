@@ -15,11 +15,10 @@ export default function HeroSection() {
         <div className="w-full h-full max-w-[720px] py-5 px-5 flex flex-col gap-10 items-center justify-center lg:flex-row lg:max-w-[1000px] xl:max-w-[1180px] xl:py-14">
           <div className="w-full flex flex-col h-full">
             <h1 className="text-center font-bold text-2xl leading-7 mx-auto text-tropicalIndigo mb-2 md:text-start md:text-[26px] lg:text-3xl">
-              Dubai's Top Leading Bus Rental Company: Minibuses to Luxury
-              Coaches
+              Dubai Top Leading Bus Rental Company: Minibuses to Luxury Coaches
             </h1>
             <p className="text-gray-700 tracking-wide">
-              Are you looking for a bus rental {companyLocation} service?{" "}
+              Are you looking for a bus rental {companyLocation} service?
               {companyName} is the right bus rental company to lead the way to
               luxury buses, minibuses, coasters, vans and sedans rentals in
               Dubai. We specialize in providing the cheapest bus rental rates

@@ -22,9 +22,8 @@ export default function RentalList() {
           </h1>
           <p>
             Are you interested in hiring the best & trustworthy bus rental in
-            Dubai? You don't need to search more as you landed on the right
-            site. Al Weam Bus Rental Dubai has been working in the market for
-            almost
+            Dubai? You dont need to search more as you landed on the right site.
+            Al Weam Bus Rental Dubai has been working in the market for almost
           </p>
           <h3
             className={`font-semibold text-[#006400] group-hover:text-white flex items-center justify-center gap-1 cursor-pointer hover:underline`}
