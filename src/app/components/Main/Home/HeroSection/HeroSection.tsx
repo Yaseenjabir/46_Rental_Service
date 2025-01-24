@@ -1,5 +1,6 @@
 import { companyLocation, companyName } from "@/app/utils/utils";
 import Image from "next/image";
+import Link from "next/link";
 import { MdArrowRightAlt } from "react-icons/md";
 export default function HeroSection() {
   return (
@@ -28,9 +29,12 @@ export default function HeroSection() {
               corporates, or for any special events on a daily, hourly, weekly,
               and monthly basis.
             </p>
-            <button className="bg-tropicalIndigoLight py-2 px-8 w-min text-nowrap font-bold text-white rounded flex items-center justify-center gap-1 hover:gap-2 transition-all ease-in-out duration-300 mt-16 self-center lg:self-start">
+            <Link
+              href="/fleets"
+              className="bg-tropicalIndigoLight py-2 px-8 w-min text-nowrap font-bold text-white rounded flex items-center justify-center gap-1 hover:gap-2 transition-all ease-in-out duration-300 mt-16 self-center lg:self-start"
+            >
               View Fleets <MdArrowRightAlt className="text-3xl" />
-            </button>
+            </Link>
           </div>
           <div className="w-full h-full">
             <Image

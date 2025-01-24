@@ -3,6 +3,9 @@ import { Geist, Geist_Mono, Fira_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import "rsuite/dist/rsuite-no-reset.min.css";
+import { CustomProvider } from "rsuite";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,6 +16,7 @@ const firaSans = Fira_Sans({
   display: "swap",
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  adjustFontFallback: false,
 });
 
 const geistMono = Geist_Mono({
@@ -33,10 +37,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${firaSans.className} ${geistMono.variable} ${geistSans.variable} antialiased bg-white text-black dark:bg-[#1b1b1b] dark:text-white`}
+        className={`${firaSans.className} ${geistMono.variable} ${geistSans.variable} antialiased bg-ghostWhite text-black dark:bg-[#1b1b1b] dark:text-white`}
       >
-        <Header />
-        <Providers>{children}</Providers>
+        <CustomProvider>
+          <Header />
+          <Providers>{children}</Providers>
+          <Footer />
+        </CustomProvider>
       </body>
     </html>
   );

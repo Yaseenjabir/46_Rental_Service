@@ -1,4 +1,5 @@
 import BestRentalService from "./components/Main/Home/BestRentalService/BestRentalService";
+import Blog from "./components/Main/Home/Blog/Blog";
 import Brands from "./components/Main/Home/Brands/Brands";
 import FindServicesNearby from "./components/Main/Home/FindServicesNearby/FindServicesNearby";
 import HeroSection from "./components/Main/Home/HeroSection/HeroSection";
@@ -20,6 +21,7 @@ export default function Home() {
           <TopTransportCompany />
           <OurCostumer />
           <Brands />
+          <Blog />
         </div>
       </main>
     </>
