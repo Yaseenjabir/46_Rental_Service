@@ -5,12 +5,16 @@ import { RxCross2 } from "react-icons/rx";
 import { Nav } from "../Header";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "motion/react";
 export default function Mobile({
   navClasses,
   navs,
+  setShowDialog,
 }: {
   navClasses: string;
   navs: Nav[];
+  showDialog: boolean;
+  setShowDialog: (val: boolean) => void;
 }) {
   const [slided, setSlided] = useState(true);
   const pathName = usePathname();
@@ -35,21 +39,33 @@ export default function Mobile({
   return (
     <>
       <header
-        className={`w-full flex flex-col items-center justify-center sticky top-0 ${isSticky && "bg-white shadow-xl"} transition-all ease-in-out duration-300`}
+        className={`w-full flex flex-col items-center justify-center sticky top-0 ${isSticky && "bg-white shadow-xl"} transition-all ease-in-out duration-300 z-20`}
       >
         <div className="w-full py-5 px-5 flex items-center justify-between max-w-[760px] lg:max-w-[1000px] xl:hidden">
           <Link href={"/"}>
-            <Image
-              alt="logo"
-              src="/assets/logos/png-log.png"
-              width={40}
-              height={50}
-            />
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <Image
+                alt="logo"
+                src="/assets/logos/png-log.png"
+                width={40}
+                height={50}
+              />
+            </motion.div>
           </Link>
-          <RxHamburgerMenu
-            className="text-2xl cursor-pointer hover:scale-125 transition-all ease-in-out duration-300"
-            onClick={() => setSlided(false)}
-          />
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            <RxHamburgerMenu
+              className="text-2xl cursor-pointer hover:scale-125 transition-all ease-in-out duration-300"
+              onClick={() => setSlided(false)}
+            />
+          </motion.div>
         </div>
       </header>
       {/* Sliding Menu */}
@@ -84,15 +100,14 @@ export default function Mobile({
                   </li>
                 );
               })}
-              {/* <a className={navClasses}>Services</a>
-              <a className={navClasses}>Fleets</a>
-              <a className={navClasses}>Vehicle Types</a>
-              <a className={navClasses}>Destinations</a>
-              <a className={navClasses}>Blogs</a>
-              <a className={navClasses}>Payment</a>
-              <a className={navClasses}>About</a>
-              <a className={navClasses}>Contact</a> */}
-              <button className="rounded-full py-2 px-3 border border-tropicalIndigo text-tropicalIndigo font-normal w-min text-nowrap hover:bg-tropicalIndigo hover:text-white transition-all ease-in-out duration-300">
+
+              <button
+                onClick={() => {
+                  setSlided(true);
+                  setShowDialog(true);
+                }}
+                className="rounded-full py-2 px-3 border border-tropicalIndigo text-tropicalIndigo font-normal w-min text-nowrap hover:bg-tropicalIndigo hover:text-white transition-all ease-in-out duration-300"
+              >
                 Book Now
               </button>
             </ul>

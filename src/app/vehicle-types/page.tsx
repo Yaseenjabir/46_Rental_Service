@@ -1,6 +1,7 @@
 import React from "react";
 import BreadCrumbs from "../components/Main/BreadCrumbs/BreadCrumbs";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function VehicleTypes() {
   return (
@@ -55,18 +56,20 @@ export default function VehicleTypes() {
             Minivan
           </h1>
         </div>
-        <div className="bg-white rounded-3xl hover:scale-105 cursor-pointer transition-all ease-in-out duration-300 px-2">
-          <Image
-            src="https://alweamtransport.com/assets/images/v-types/alweam-icon-sedan.svg"
-            alt="vehicle-image"
-            layout="responsive"
-            height={700}
-            width={1400}
-          />
-          <h1 className="font-semibold text-gray-500 text-center text-lg mb-5">
-            Sedan
-          </h1>
-        </div>
+        <Link href={`/vehicle-types/sedan`}>
+          <div className="bg-white rounded-3xl hover:scale-105 cursor-pointer transition-all ease-in-out duration-300 px-2">
+            <Image
+              src="https://alweamtransport.com/assets/images/v-types/alweam-icon-sedan.svg"
+              alt="vehicle-image"
+              layout="responsive"
+              height={700}
+              width={1400}
+            />
+            <h1 className="font-semibold text-gray-500 text-center text-lg mb-5">
+              Sedan
+            </h1>
+          </div>
+        </Link>
         <div className="bg-white rounded-3xl hover:scale-105 cursor-pointer transition-all ease-in-out duration-300 px-2">
           <Image
             src="https://alweamtransport.com/assets/images/v-types/alweam-icon-suv.svg"

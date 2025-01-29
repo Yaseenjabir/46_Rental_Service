@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Common from "./Common/Common";
 import Desktop from "./Desktop/Desktop";
 import Mobile from "./Mobile/Mobile";
+import { useState } from "react";
 
 export interface Nav {
   id: number;
@@ -15,8 +16,6 @@ export default function Header() {
   const navClasses: string =
     "cursor-pointer hover:text-tropicalIndigoLight transition-all ease-in-out duration-300 w-min text-nowrap";
 
-  const pathName = usePathname();
-
   const navs: Nav[] = [
     { id: 1, nav: "Home", url: "/" },
     { id: 2, nav: "Services", url: "/services" },
@@ -27,16 +26,30 @@ export default function Header() {
     { id: 7, nav: "About", url: "/about" },
     { id: 8, nav: "Contact", url: "/contact" },
   ];
+  const [showDialog, setShowDialog] = useState(false);
+
+  const pathName = usePathname();
 
   return (
     <>
-      {pathName !== "/auth" && (
-        <>
-          <Common />
-          <Mobile navClasses={navClasses} navs={navs} />
-          <Desktop navClasses={navClasses} navs={navs} />
-        </>
-      )}
+      {pathName === "/auth" ||
+        (!pathName?.startsWith("/studio") && (
+          <>
+            <Common />
+            <Mobile
+              navClasses={navClasses}
+              navs={navs}
+              showDialog={showDialog}
+              setShowDialog={setShowDialog}
+            />
+            <Desktop
+              navClasses={navClasses}
+              navs={navs}
+              showDialog={showDialog}
+              setShowDialog={setShowDialog}
+            />
+          </>
+        ))}
     </>
   );
 }

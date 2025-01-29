@@ -47,8 +47,13 @@ export const Blog = defineType({
     defineField({
       title: "Category",
       name: "category",
-      type: "reference",
-      to: [{ type: "category" }],
+      type: "string",
+      options: {
+        list: [
+          { title: "Dubai", value: "Dubai" },
+          { title: "Sharjah", value: "Sharjah" },
+        ],
+      },
       validation: (Rule) => Rule.required(),
       description: "Select the category of the post",
     }),

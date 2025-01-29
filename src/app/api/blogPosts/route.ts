@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { client } from "../../../sanity/lib/client";
 const query = `
 *[_type == 'blog'] | order(_createdAt desc){
-  "category" : category->category,
+  category,
   summary,
   by->{name},
   image,

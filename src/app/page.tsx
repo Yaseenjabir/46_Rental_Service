@@ -11,9 +11,9 @@ import TopTransportCompany from "./components/Main/Home/TopTransportCompany/TopT
 export default function Home() {
   return (
     <>
-      <main className="bg-ghostWhite w-full flex items-center justify-center">
+      <main className="bg-ghostWhite w-full flex flex-col items-center justify-center">
+        <HeroSection />
         <div className="w-full max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px]">
-          <HeroSection />
           <FindServicesNearby />
           <RentalPartner />
           <BestRentalService />

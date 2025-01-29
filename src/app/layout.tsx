@@ -6,6 +6,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import "rsuite/dist/rsuite-no-reset.min.css";
 import { CustomProvider } from "rsuite";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,6 +43,7 @@ export default function RootLayout({
         <CustomProvider>
           <Header />
           <Providers>{children}</Providers>
+          <Toaster />
           <Footer />
         </CustomProvider>
       </body>

@@ -1,7 +1,36 @@
+import { Post, truncateText } from "@/app/utils/utils";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+import { formatDistanceToNow } from "date-fns";
 
-export default function Blog() {
+export async function generateStaticParams() {
+  const posts = await fetchPosts(); // Get the first 3 posts
+  return posts.map((post: Post) => ({
+    slug: post.slug,
+  }));
+}
+
+async function fetchPosts() {
+  const query = `
+*[_type == 'blog'] | order(_createdAt desc)[0..2]{
+category,
+summary,
+by->{name},
+image,
+_createdAt,
+title,
+"slug" : slug.current
+}`;
+  const res = await client.fetch(query);
+
+  return res;
+}
+export default async function Blog() {
+  const posts: Post[] = await fetchPosts();
+
   return (
     <section className="py-10 px-5">
       <div className="text-center flex flex-col items-center justify-center gap-2">
@@ -12,30 +41,39 @@ export default function Blog() {
       </div>
 
       <div className="w-full grid grid-cols-1 gap-10 mt-10 md:grid-cols-2 lg:grid-cols-3">
-        <div className="w-full hover:scale-105 transition-all ease-in-out duration-300">
-          <Image
-            src="https://alweamtransport.com/assets/images/2024/09/21/Small%20to%20Luxury%20Buses%20in%20Dubai-400x300.jpg"
-            alt="blog-post"
-            height={200}
-            width={300}
-            layout="responsive"
-            className="w-full rounded-t-lg"
-          />
-          <div className="bg-white py-3 px-5 flex flex-col gap-4 rounded-b-xl shadow-lg">
-            <h4 className="font-semibold text-gray-600">4 months ago</h4>
-            <h1 className="font-bold text-tropicalIndigo text-2xl cursor-pointer">
-              Bus Rental Dubai: Hire from small SUVs, Minibuses to Luxury
-              Coaches in Dubai and other cities
-            </h1>
-            <p className="text-gray-600">
-              Dubais magnificent skyline, fantastic retail centers, and diverse
-              cultural events make it a must-see destination. However, it is not
-              easy to balance a huge group in such a congested metropolis. Feel
-              free to enjoy your ride with us anytime
-            </p>
-          </div>
-        </div>
-        <div className="w-full hover:scale-105 transition-all ease-in-out duration-300">
+        {posts.length > 0 &&
+          posts.map((item: Post, index: number) => {
+            return (
+              <div
+                key={index}
+                className="w-full hover:scale-105 transition-all ease-in-out duration-300"
+              >
+                <Image
+                  src={urlFor(item.image).width(300).height(200).url()}
+                  alt="blog-post"
+                  height={200}
+                  width={300}
+                  layout="responsive"
+                  className="w-full rounded-t-lg"
+                />
+
+                <div className="bg-white py-3 px-5 flex flex-col gap-4 rounded-b-xl shadow-lg">
+                  <h4 className="font-semibold text-gray-600">
+                    {formatDistanceToNow(item._createdAt)} ago
+                  </h4>
+                  <h1 className="font-bold text-tropicalIndigo text-2xl cursor-pointer h-[70px]">
+                    <Link href={`/blog/${item.slug}`}>
+                      {truncateText(item.title, 45)}
+                    </Link>
+                  </h1>
+                  <p className="text-gray-600 h-[255px]">
+                    {truncateText(item.summary, 350)}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        {/* <div className="w-full hover:scale-105 transition-all ease-in-out duration-300">
           <Image
             src="https://alweamtransport.com/assets/images/2024/09/16/Sports%20Club%20Bus%20Rental%20Dubai-400x300.jpg"
             alt="blog-post"
@@ -80,7 +118,7 @@ export default function Blog() {
               arriva
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

@@ -16,6 +16,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+interface BlogContentProps {
+  posts: Post[];
+  page: number;
+  totalPages: number;
+  category: string;
+}
+
 async function fetchPosts() {
   const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL;
   const res = await fetch(`${baseUrl}/api/blogPosts`);
@@ -29,14 +36,14 @@ async function fetchPosts() {
 export default async function Blog({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string; category?: string }>;
+  searchParams: Promise<{ page: string; category: string }>;
 }) {
   const { page, category } = await searchParams;
 
   const currentPage = parseInt(page as string) || 1;
   const limit = 4;
 
-  const posts = await fetchPosts();
+  const posts: Post[] = await fetchPosts();
 
   const filteredPosts = category
     ? posts.filter((post: Post) => post.category === category)
@@ -64,17 +71,7 @@ export default async function Blog({
   );
 }
 
-function BlogContent({
-  posts,
-  page,
-  totalPages,
-  category,
-}: {
-  posts: Post[];
-  page: number;
-  totalPages: number;
-  category?: string;
-}) {
+function BlogContent({ posts, page, totalPages, category }: BlogContentProps) {
   return (
     <section className="w-full max-w-[720px] lg:max-w-[900px] py-10 px-5">
       <div className="w-full flex items-center justify-between">
@@ -103,7 +100,8 @@ function BlogContent({
 
       {/* Blog Posts */}
       <div className="flex flex-col w-full items-center justify-center gap-10 mt-10">
-        {posts.length > 0 &&
+        {posts &&
+          posts.length > 0 &&
           posts.map((item: Post, index) => (
             <div key={index}>
               <Image
@@ -144,7 +142,7 @@ function BlogContent({
 
       {/* Pagination */}
       <div className="flex justify-center gap-2 mt-10">
-        {page > 1 && (
+        {page && page > 1 && (
           <Link
             href={`/blog?page=${page - 1}&category=${category || ""}`}
             className="py-2 px-3 text-sm bg-gray-200 rounded hover:bg-gray-300"
@@ -165,7 +163,7 @@ function BlogContent({
             {index + 1}
           </Link>
         ))}
-        {page < totalPages && (
+        {page && totalPages && page < totalPages && (
           <Link
             href={`/blog?page=${page + 1}&category=${category || ""}`}
             className="py-2 px-3 text-sm bg-gray-200 rounded hover:bg-gray-300"
