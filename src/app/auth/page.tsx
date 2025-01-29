@@ -24,6 +24,8 @@ export default function Auth() {
   const { toast } = useToast();
   const router = useRouter();
 
+  console.log("h");
+
   async function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
