@@ -1,11 +1,6 @@
 "use client";
 import Image from "next/image";
-import { CiClock2 } from "react-icons/ci";
-import { PiHourglassLight } from "react-icons/pi";
-import { IoAirplaneOutline } from "react-icons/io5";
-import { LuCalendarDays } from "react-icons/lu";
-import { FaWhatsapp } from "react-icons/fa";
-import { MdDirectionsCar } from "react-icons/md";
+import { FaCalendarAlt, FaWhatsapp } from "react-icons/fa";
 import { PiInfoLight } from "react-icons/pi";
 import { truncateText, Vehicle } from "@/app/utils/utils";
 import { urlFor } from "@/sanity/lib/image";
@@ -15,12 +10,14 @@ import FleetForm from "./FleetForm";
 import { RxCross2 } from "react-icons/rx";
 import { usePathname } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { FaBuilding, FaUsers } from "react-icons/fa6";
+import { IoSettings } from "react-icons/io5";
 
 export default function FleetsList({ data }: { data: Vehicle[] }) {
   const [showDialog, setShowDialog] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Vehicle>();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const itemsPerPage = 4;
   const totalPages = Math.ceil(data.length / itemsPerPage); // Total number of pages
 
   const pathName = usePathname();
@@ -66,7 +63,8 @@ For more details, visit: *${process.env.NEXT_PUBLIC_VERCEL_URL}/${item.slug}*
                   height={300}
                   width={440}
                 />
-                <div className="bg-white p-7 text-gray-600 rounded-b-xl">
+
+                {/* <div className="bg-white p-7 text-gray-600 rounded-b-xl">
                   <h1 className="text-gray-700 text-xl font-medium h-[65px]">
                     <Link href={`/fleets/${item.slug}`}>
                       {truncateText(item.name, 40)}
@@ -132,6 +130,96 @@ For more details, visit: *${process.env.NEXT_PUBLIC_VERCEL_URL}/${item.slug}*
                         setShowDialog(true);
                       }}
                       className="rounded-full py-2 px-5 border hover:bg-black hover:text-white transition-all ease-in-out duration-300"
+                    >
+                      Send Inquiry
+                    </button>
+                    <div className="flex text-2xl items-center gap-2">
+                      <Link
+                        href={`/fleets/${item.slug}`}
+                        aria-label="Go to vehicle-info page"
+                      >
+                        <PiInfoLight className="text-[43px] cursor-pointer text-gray-600 hover:animate-bounce" />
+                      </Link>
+                      <div
+                        aria-label="Redirect to whatsapp link"
+                        className="p-2 rounded-full bg-green-500 text-white hover:animate-bounce cursor-pointer"
+                      >
+                        <FaWhatsapp onClick={() => redirectToWhatsapp(item)} />
+                      </div>
+                    </div>
+                  </div>
+                </div> */}
+
+                <div className="bg-white py-5 px-3 text-gray-600 rounded-b-xl w-full">
+                  <h1 className="text-gray-700 text-xl font-medium h-[65px]">
+                    <Link href={`/fleets/${item.slug}`}>
+                      {truncateText(item.name, 40)}
+                    </Link>
+                  </h1>
+                  <div className="grid grid-cols-2 gap-y-5 ">
+                    <div className="text-tropicalIndigo">
+                      <div className="flex items-center justify-start gap-2">
+                        <div className="p-1 rounded-md border">
+                          <FaBuilding className="text-3xl" />
+                        </div>
+                        <div className="flex flex-col text-gray-600">
+                          <h1 className="font-semibold">Company</h1>
+                          <p className="text-sm">
+                            {item.brand.charAt(0).toUpperCase() +
+                              item.brand.slice(1)}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-tropicalIndigo">
+                      <div className="flex items-center justify-start gap-2">
+                        <div className="p-1 rounded-md border">
+                          <FaUsers className="text-3xl" />
+                        </div>
+                        <div className="flex flex-col text-gray-600">
+                          <h1 className="font-semibold">Capacity</h1>
+                          <p className="text-sm">
+                            {item.capacity.charAt(0).toUpperCase() +
+                              item.capacity.slice(1)}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-tropicalIndigo">
+                      <div className="flex items-center justify-start gap-2">
+                        <div className="p-1 rounded-md border">
+                          <FaCalendarAlt className="text-3xl" />
+                        </div>
+                        <div className="flex flex-col text-gray-600">
+                          <h1 className="font-semibold">Manufactured</h1>
+                          <p className="text-sm">{item.manufactured}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-tropicalIndigo">
+                      <div className="flex items-center justify-start gap-2">
+                        <div className="p-1 rounded-md border">
+                          <IoSettings className="text-3xl" />
+                        </div>
+                        <div className="flex flex-col text-gray-600">
+                          <h1 className="font-semibold">Transmission</h1>
+                          <p className="text-sm">
+                            {" "}
+                            {item.transmission.charAt(0).toUpperCase() +
+                              item.transmission.slice(1)}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-10 flex items-center justify-between">
+                    <button
+                      aria-label="Send Inquiry"
+                      onClick={() => {
+                        setSelectedItem(item);
+                        setShowDialog(true);
+                      }}
+                      className="rounded-full w-full py-2 px-5 border hover:bg-black hover:text-white transition-all ease-in-out duration-300"
                     >
                       Send Inquiry
                     </button>

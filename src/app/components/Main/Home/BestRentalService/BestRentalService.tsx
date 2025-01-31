@@ -13,13 +13,13 @@ export default function BestRentalService() {
           </div>
           <div className="flex flex-col justify-start">
             <h1 className="mb-1 font-medium text-center">Safety First</h1>
-            <p>
+            <p className="text-justify">
               Safety and comfortability in a secure environment for all our
               passengers is our top priority which makes us the best bus rental
-              service in dubai. We ensure a safe and comfortable vehicles are
-              prepared with the most latest security features, and our staff is
-              trained to guarantee smooth and secure travel. A GPS system
-              installed in all our fleets for real time tracking.
+              service in Dubai. We ensure safe and comfortable vehicles are
+              prepared with the latest security features, and our staff is
+              trained to guarantee smooth and secure travel. A GPS system is
+              installed in all our fleets for real-time tracking.
             </p>
           </div>
         </div>
@@ -28,7 +28,7 @@ export default function BestRentalService() {
             <IoDiamond className="text-5xl" />
           </div>
           <h1 className="mb-1 font-medium">Luxury Vehicles</h1>
-          <p>
+          <p className="text-justify">
             Our high-end fleet of buses offers unparalleled comfort and fashion
             providing all our passengers with luxurious travel experience. We
             offer a wide range of luxury vehicles both for business and leisure
@@ -41,10 +41,10 @@ export default function BestRentalService() {
             <MdOutlineNotes className="text-5xl" />
           </div>
           <h1 className="mb-1 font-medium">Transparent Rules</h1>
-          <p>
+          <p className="text-justify">
             Accomplishing greatness includes open information entrances,
-            easy-to-understand communication, consultation processes, complaints
-            and feedback mechanisms, transparent pricing structures, real-time
+            easy-to-understand communication, consultations, complaints and
+            feedback mechanisms, transparent pricing structures, real-time
             tracking, monitoring, independent oversight and auditing, data
             protection and privacy which is important in bus rental services in
             dubai.
@@ -57,7 +57,7 @@ export default function BestRentalService() {
           <h1 className="mb-1 font-medium">
             Chauffeur Service in {companyLocation}
           </h1>
-          <p>
+          <p className="text-justify">
             Our chauffeur services prioritize your safety and convenience,
             providing you with skilled, licensed drivers who are knowledgeable
             about the best routes and driving practices. Say goodbye to the

@@ -23,7 +23,7 @@ export default function Navs({ title, data }: Nav) {
             <li key={item.id} className="flex items-center gap-1 text-gray-400">
               <MdKeyboardArrowRight />
               <Link
-                className="text-[#5d49e2] text-sm hover:text-headings w-min text-nowrap"
+                className="text-headings text-sm hover:text-headings w-min text-nowrap"
                 href={item.link}
               >
                 {item.name}

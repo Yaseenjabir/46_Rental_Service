@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   *[_type == 'vehicle' && slug.current == '${queryParam}'] {
   name,
   images,
-  company,
+  brand,
   capacity,
   manufactured,
   transmission,

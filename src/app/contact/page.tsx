@@ -41,7 +41,7 @@ const formSchema = z.object({
   name: z.string().min(6).max(50),
   email: z.string().email(),
   message: z.string().min(10).max(1024),
-  number: z.string().length(10, { message: "Phone number must be 13 digits" }),
+  number: z.string().length(9, { message: "Phone number must be 13 digits" }),
 });
 
 const ContactUs = () => {
@@ -56,7 +56,7 @@ const ContactUs = () => {
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, "");
 
-    if (value.length > 10) {
+    if (value.length > 9) {
       value = value.slice(0, 10);
     }
 
@@ -101,6 +101,11 @@ const ContactUs = () => {
         email: "",
         message: "",
         number: "",
+      });
+      setPhone("");
+      toast({
+        title: "Submitted",
+        description: "Your form has been submitted succesfully",
       });
     }
   }
@@ -199,7 +204,7 @@ const ContactUs = () => {
                           placeholder="Enter your phone number"
                           value={phone}
                           onChange={handlePhoneChange}
-                          maxLength={14}
+                          maxLength={13}
                         />
                       </FormControl>
                       <FormMessage />

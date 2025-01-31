@@ -49,7 +49,11 @@ export default async function Blog() {
                 className="w-full hover:scale-105 transition-all ease-in-out duration-300"
               >
                 <Image
-                  src={urlFor(item.image).width(300).height(200).url()}
+                  src={
+                    item.image
+                      ? urlFor(item.image).width(300).height(200).url()
+                      : ""
+                  }
                   alt="blog-post"
                   height={200}
                   width={300}
@@ -65,61 +69,15 @@ export default async function Blog() {
                     href={`/blog/${item.slug}`}
                     className="font-bold text-tropicalIndigo text-xl cursor-pointer"
                   >
-                    {truncateText(item.title, 45)}
+                    {item.title ? truncateText(item.title, 45) : ""}
                   </Link>
                   <p className="text-gray-600">
-                    {truncateText(item.summary, 250)}
+                    {item.summary ? truncateText(item.summary, 250) : ""}
                   </p>
                 </div>
               </div>
             );
           })}
-        {/* <div className="w-full hover:scale-105 transition-all ease-in-out duration-300">
-          <Image
-            src="https://alweamtransport.com/assets/images/2024/09/16/Sports%20Club%20Bus%20Rental%20Dubai-400x300.jpg"
-            alt="blog-post"
-            height={200}
-            width={300}
-            layout="responsive"
-            className="w-full rounded-t-lg"
-          />
-          <div className="bg-white py-3 px-5 flex flex-col gap-4 rounded-b-xl shadow-lg">
-            <h4 className="font-semibold text-gray-600">4 months ago</h4>
-            <h1 className="font-bold text-tropicalIndigo text-2xl cursor-pointer">
-              Sports Event Group Transportation: Rliable and Secure Charter Bus
-              in Dubai
-            </h1>
-            <p className="text-gray-600">
-              AL Weam Bus Rental provide you all kinds of passenger transport
-              services in Dubai and to other emirates of United Arab Emirates.
-              If you are looking for sport team bus with driver Dubai for
-              sporting
-            </p>
-          </div>
-        </div>
-        <div className="w-full hover:scale-105 transition-all ease-in-out duration-300">
-          <Image
-            src="https://alweamtransport.com/assets/images/2024/09/13/Staff%20Transportation%20in%20Dubai-400x300.jpg"
-            alt="blog-post"
-            height={200}
-            width={300}
-            layout="responsive"
-            className="w-full rounded-t-lg"
-          />
-          <div className="bg-white py-3 px-5 flex flex-col gap-4 rounded-b-xl shadow-lg">
-            <h4 className="font-semibold text-gray-600">4 months ago</h4>
-            <h1 className="font-bold text-tropicalIndigo text-2xl cursor-pointer">
-              Staff Transportation Dubai: Explore How much Staff Pick and Drop
-              Service is Beneficial
-            </h1>
-            <p className="text-gray-600">
-              Incorporated worldwide, employee transportation is an activity
-              that is becoming critical by the day, given the rapid growth. It
-              has been shown that ensuring that there are no delays in their
-              arriva
-            </p>
-          </div>
-        </div> */}
       </div>
     </section>
   );

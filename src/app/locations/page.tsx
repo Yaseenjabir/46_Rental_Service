@@ -2,7 +2,7 @@ import Image from "next/image";
 import BreadCrumbs from "../components/Main/BreadCrumbs/BreadCrumbs";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
-import { Location } from "../utils/utils";
+import { Location, truncateText } from "../utils/utils";
 import { PortableText } from "next-sanity";
 import { Metadata } from "next";
 
@@ -40,8 +40,8 @@ export default async function Locations({
                     src={urlFor(item.image).width(460).url()}
                   />
                   <div className="p-7 bg-white rounded-b-2xl flex flex-col gap-3 shadow-lg">
-                    <h1 className="font-semibold text-gray-600 text-lg">
-                      {item.locationName}
+                    <h1 className="font-semibold text-gray-600 text-lg h-[56px] overflow-hidden">
+                      {truncateText(item.locationName, 50)}
                     </h1>
                     <section className="text-gray-400 h-12 overflow-hidden">
                       <PortableText value={item.description} />

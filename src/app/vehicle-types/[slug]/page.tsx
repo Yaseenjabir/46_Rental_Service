@@ -48,10 +48,9 @@ export default async function Page({
     brand,
     images[0],
     name,
-    perHourRental,
-    fullDayRental,
-    airportTransfer,
-    weeklyRental,
+    manufactured,
+    capacity,
+    transmission,
     "slug" : slug.current
 }`;
 

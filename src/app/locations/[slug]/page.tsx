@@ -24,7 +24,6 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
 
-  // Fetch location data based on the slug
   const query = `*[_type == "location" && slug.current == "${slug}"] {
     locationName,
     description
@@ -32,7 +31,6 @@ export async function generateMetadata({
 
   const data = await client.fetch(query);
 
-  // Return dynamic metadata based on the location data
   return {
     title: `${data?.locationName} | Locations for Bus Rental | 3B Transport LLC`,
     description: `Explore the details of ${data?.locationName}. Find out about the available bus rental services and fleets at this location, perfect for your transportation needs in the UAE.`,
@@ -58,10 +56,9 @@ export default async function CityName({
     brand,
     images[0],
     name,
-    perHourRental,
-    fullDayRental,
-    airportTransfer,
-    weeklyRental,
+    transmission,
+    manufactured,
+    capacity,
     "slug" : slug.current
   }    
 }[0]
@@ -87,13 +84,13 @@ export default async function CityName({
               className="rounded"
               src={data && urlFor(data?.image).width(1130).url()}
             />
-            <section className="section-portable px-5">
+            <section className="section-portable px-5 py-5">
               <PortableText value={data.description} />
             </section>
           </div>
           <div
             style={{ height: "300px", width: "100%" }}
-            className="z-10 relative p-3 bg-white rounded-lg"
+            className="z-10 relative p-3 bg-white rounded-lg my-5"
           >
             <MapComponent latitude={data.latitude} longitude={data.longitude} />
           </div>

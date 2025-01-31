@@ -17,13 +17,12 @@ async function fetchData() {
 
 const query = `*[_type == "vehicle"][0..2] {
  vehicleType,
- brand,
  images[0],
  name,
- perHourRental,
- fullDayRental,
- airportTransfer,
- weeklyRental,
+ brand,
+ manufactured,
+ capacity,
+ transmission,
  "slug" : slug.current
 }`;
 export default async function ServiceList() {

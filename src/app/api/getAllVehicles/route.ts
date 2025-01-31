@@ -12,6 +12,9 @@ const query = `
     fullDayRental,
     airportTransfer,
     weeklyRental,
+    transmission,
+    capacity,
+    manufactured,
     "slug" : slug.current
 }
 `;

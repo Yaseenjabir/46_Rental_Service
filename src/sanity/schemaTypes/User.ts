@@ -17,12 +17,14 @@ export const User = defineType({
       title: "About User",
       type: "string",
       description: "Write info about user",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "image",
       title: "User image",
       type: "image",
       description: "Upload user image",
+      validation: (Rule) => Rule.required(),
     }),
   ],
 });

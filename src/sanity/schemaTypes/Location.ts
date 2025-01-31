@@ -41,6 +41,7 @@ export const Location = defineType({
           if (!latitude && longitude) {
             return "Latitude is required if Longitude is provided";
           }
+
           return true;
         }),
     }),
@@ -61,7 +62,6 @@ export const Location = defineType({
           if (!longitude && latitude) {
             return "Longitude is required if Latitude is provided";
           }
-
           return true;
         }),
     }),

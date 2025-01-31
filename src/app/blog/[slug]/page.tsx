@@ -67,17 +67,14 @@ export default async function Page({
 
   return (
     data !== undefined && (
-      <article className="mt-5 py-10 mb-24 px-2 2xl:px-12 flex flex-col gap-y-8 max-w-[720px] mx-auto bg-white">
+      <article className="mt-5 py-10 mb-24 px-2 2xl:px-12 flex flex-col gap-y-8 max-w-[960px] mx-auto bg-white rounded">
         {/* Blog Title */}
-        <h1 className="text-xl px-1 lg:text-3xl font-semibold text-dark dark:text-light text-headings">
+        <h1 className="text-xl lg:text-3xl font-semibold text-dark dark:text-light text-headings px-4">
           {data.title}
         </h1>
 
         {/* Featured Image */}
         <Image
-          // src={
-          //   "https://alweamtransport.com/assets/images/2024/02/17/Red%20White%20Modern%20Car%20Rental%20Banner%20Landscape.jpg"
-          // }
           src={urlFor(data.image).width(720).height(350).url()}
           width={500}
           height={500}
@@ -87,7 +84,7 @@ export default async function Page({
         />
 
         {/* Blog Summary Section */}
-        <section>
+        <section className="px-4">
           <h2 className="text-xl xs:text-2xl md:text-2xl font-bold text-tropicalIndigo uppercase text-accentDarkPrimary">
             Summary
           </h2>
@@ -116,7 +113,7 @@ export default async function Page({
         </section>
 
         {/* Main Body of Blog */}
-        <section className="section-portable">
+        <section className="section-portable px-7">
           <PortableText value={data.content} />
         </section>
       </article>

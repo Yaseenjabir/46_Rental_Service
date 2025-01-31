@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 
 import "./styles.css";
 
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import { IoMdStar } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { truncateText } from "@/app/utils/utils";
@@ -18,7 +18,7 @@ interface Slide {
   username: string;
 }
 
-const query = `*[_type == "review"] | order(_createdAt desc) [0..2] {
+const query = `*[_type == "review"] | order(_createdAt desc) [0..4] {
 username,
 review,
 rating
@@ -49,8 +49,11 @@ export default function SliderComp() {
           modifier: 1,
           slideShadows: true,
         }}
-        pagination={true}
-        modules={[EffectCoverflow, Pagination]}
+        autoplay={{
+          delay: 2500, // Delay between slides (in ms)
+          disableOnInteraction: false, // Allow autoplay to continue after user interaction
+        }}
+        modules={[EffectCoverflow, Pagination, Autoplay]}
         className="mySwiper"
       >
         {data &&

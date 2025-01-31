@@ -11,13 +11,13 @@ export default {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        tropicalIndigo: "#6046fa",
-        tropicalIndigoLight: "#9381FF",
+        tropicalIndigo: "#c9261a",
+        tropicalIndigoLight: "#c90a0a",
         periWinkle: "#B8B8FF",
         ghostWhite: "#F8f7FF",
         antiqueWhite: "#FFEEDD",
         apricot: "#FFD8BE",
-        headings: "#422dbe",
+        headings: "#c9261a",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
