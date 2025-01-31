@@ -41,12 +41,6 @@ export const Location = defineType({
           if (!latitude && longitude) {
             return "Latitude is required if Longitude is provided";
           }
-
-          const latPattern = /^-?([0-8]?[0-9]|90)(\.[0-9]{1,4})?$/;
-          if (!latPattern.test(latitude)) {
-            return "Latitude must be a valid number between -90 and 90 with up to 4 decimal places";
-          }
-
           return true;
         }),
     }),
@@ -66,11 +60,6 @@ export const Location = defineType({
 
           if (!longitude && latitude) {
             return "Longitude is required if Latitude is provided";
-          }
-
-          const lonPattern = /^-?((1[0-7][0-9])|(180))(\.[0-9]{1,4})?$/;
-          if (!lonPattern.test(longitude)) {
-            return "Longitude must be a valid number between -180 and 180 with up to 4 decimal places";
           }
 
           return true;
