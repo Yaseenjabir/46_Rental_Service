@@ -1,9 +1,9 @@
 import { Image } from "sanity";
 import { PortableTextBlock } from "@portabletext/types"; // Import PortableTextBlock type
 
-export const email = "operations@alweamtransport.com";
+export const email = "Info@threebtransport.com";
 
-export const phone = "+971 50 467 2553";
+export const phone = "+971521143801";
 
 export const companyLocation = "Dubai";
 
