@@ -247,13 +247,13 @@ export default function FleetForm({
               </FormItem>
             )}
           />
-          <div className="flex items-center justify-between gap-10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-10">
             {/* Passengers  */}
             <FormField
               control={form.control}
               name="passengers"
               render={({ field }) => (
-                <FormItem className="w-[45%]">
+                <FormItem className="md:w-[45%] w-full">
                   <FormLabel>Passengers</FormLabel>
                   <FormControl>
                     <Input type="number" defaultValue={1} {...field} />
@@ -267,7 +267,7 @@ export default function FleetForm({
               control={form.control}
               name="child"
               render={({ field }) => (
-                <FormItem className="w-[45%]">
+                <FormItem className="w-full md:w-[45%]">
                   <FormLabel>Child</FormLabel>
                   <FormControl>
                     <Input type="number" defaultValue={1} {...field} />
@@ -277,13 +277,13 @@ export default function FleetForm({
               )}
             />
           </div>
-          <div className="flex items-center justify-between gap-10 w-full">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10 w-full">
             {/* Pickup Location  */}
             <FormField
               control={form.control}
               name="pickupLocation"
               render={({ field }) => (
-                <FormItem className="w-[45%]">
+                <FormItem className="md:w-[45%]">
                   <FormLabel>Pickup Location</FormLabel>
                   <FormControl>
                     <Input
@@ -301,12 +301,13 @@ export default function FleetForm({
               control={form.control}
               name="pickupDate"
               render={({ field }) => (
-                <FormItem className="flex flex-col w-[45%] space-y-4 ">
+                <FormItem className="flex flex-col md:w-[45%] space-y-4 ">
                   <FormLabel>Pickup Date</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
+                          aria-label="Calendar"
                           variant={"outline"}
                           className={cn(
                             "pl-3 text-left font-normal",
@@ -379,6 +380,7 @@ export default function FleetForm({
 
           <div className="flex flex-col gap-3">
             <Button
+              aria-label="Reserve and book now"
               name="action"
               value="whatsapp"
               type="submit"
@@ -388,17 +390,16 @@ export default function FleetForm({
               Reserve and book now
             </Button>
             {loader ? (
-              <Button
-                name="action"
-                value="email"
-                type="button"
-                className="bg-tropicalIndigo py-4 hover:bg-headings w-full flex items-center justify-center gap-1"
+              <div
+                aria-label="Submitting"
+                className="bg-tropicalIndigo py-2 rounded-md text-sm font-semibold text-white hover:bg-headings w-full flex items-center justify-center gap-1"
               >
                 <FaArrowRotateRight className="animate-spin" />
-                Submitting
-              </Button>
+                Submiting...
+              </div>
             ) : (
               <Button
+                aria-label="Reserve and book with email"
                 name="action"
                 value="email"
                 type="submit"

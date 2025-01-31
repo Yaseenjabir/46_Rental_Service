@@ -11,10 +11,32 @@ export async function generateStaticParams() {
   const query = `
   *[_type == "location"]{
   "slug" : slug.current
-}`;
+  }`;
 
   const data = await client.fetch(query);
   return data.map((item: Location) => ({ params: { slug: item.slug } }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+
+  // Fetch location data based on the slug
+  const query = `*[_type == "location" && slug.current == "${slug}"] {
+    locationName,
+    description
+  }[0]`;
+
+  const data = await client.fetch(query);
+
+  // Return dynamic metadata based on the location data
+  return {
+    title: `${data?.locationName} | Locations for Bus Rental | 3B Transport LLC`,
+    description: `Explore the details of ${data?.locationName}. Find out about the available bus rental services and fleets at this location, perfect for your transportation needs in the UAE.`,
+  };
 }
 
 export default async function CityName({
@@ -55,7 +77,7 @@ export default async function CityName({
           secondCrumb: { name: data && data.locationName, link: "" },
         }}
       />
-      {data !== undefined && (
+      {data && (
         <section className="w-full py-10 px-5 max-w-[720px] lg:max-w-[960px] mx-auto">
           <div className="bg-white font-sans text-gray-900">
             <Image
@@ -63,7 +85,7 @@ export default async function CityName({
               width={1130}
               alt="location-pic"
               className="rounded"
-              src={urlFor(data.image).width(1130).url()}
+              src={data && urlFor(data?.image).width(1130).url()}
             />
             <section className="section-portable px-5">
               <PortableText value={data.description} />

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 import { Location } from "../utils/utils";
 import { PortableText } from "next-sanity";
+import { Metadata } from "next";
 
 export default async function Locations({
   searchParams,
@@ -107,8 +108,14 @@ async function fetchData() {
     }
     const data = await res.json();
     return data;
-  } catch (error) {
-    console.log(error.message);
+  } catch {
     return [];
   }
 }
+
+export const metadata: Metadata = {
+  title:
+    "Our Locations | Bus Rental Services Across the UAE | 3B Transport LLC",
+  description:
+    "Find 3B Transport LLC’s bus rental services available at multiple locations across the UAE, providing reliable transportation solutions for corporate, event, and private needs.",
+};

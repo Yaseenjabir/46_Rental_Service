@@ -5,7 +5,6 @@ import { RxCross2 } from "react-icons/rx";
 import { Nav } from "../Header";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "motion/react";
 export default function Mobile({
   navClasses,
   navs,
@@ -43,29 +42,21 @@ export default function Mobile({
       >
         <div className="w-full py-5 px-5 flex items-center justify-between max-w-[760px] lg:max-w-[1000px] xl:hidden">
           <Link href={"/"}>
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.5 }}
-            >
+            <div>
               <Image
                 alt="logo"
                 src="/assets/logos/png-log.png"
                 width={40}
                 height={50}
               />
-            </motion.div>
+            </div>
           </Link>
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.5 }}
-          >
+          <div>
             <RxHamburgerMenu
               className="text-2xl cursor-pointer hover:scale-125 transition-all ease-in-out duration-300"
               onClick={() => setSlided(false)}
             />
-          </motion.div>
+          </div>
         </div>
       </header>
       {/* Sliding Menu */}
@@ -102,6 +93,7 @@ export default function Mobile({
               })}
 
               <button
+                aria-label="Book Now"
                 onClick={() => {
                   setSlided(true);
                   setShowDialog(true);

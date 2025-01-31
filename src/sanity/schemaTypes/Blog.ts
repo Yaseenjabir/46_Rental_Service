@@ -1,3 +1,4 @@
+import { locations } from "@/app/utils/utilInfo";
 import { defineField, defineType } from "sanity";
 
 export const Blog = defineType({
@@ -49,10 +50,7 @@ export const Blog = defineType({
       name: "category",
       type: "string",
       options: {
-        list: [
-          { title: "Dubai", value: "Dubai" },
-          { title: "Sharjah", value: "Sharjah" },
-        ],
+        list: locations,
       },
       validation: (Rule) => Rule.required(),
       description: "Select the category of the post",

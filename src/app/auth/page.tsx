@@ -24,8 +24,6 @@ export default function Auth() {
   const { toast } = useToast();
   const router = useRouter();
 
-  console.log("h");
-
   async function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
@@ -38,10 +36,10 @@ export default function Auth() {
       if (!res.ok) {
         throw new Error(`Please enter valid email and password`);
       }
+      router.push("/studio");
       toast({
         description: "You're now logged In",
       });
-      router.push("/studio");
     } catch (ex) {
       setErrMsg(ex.message);
       dialogRef.current?.click();
@@ -86,15 +84,13 @@ export default function Auth() {
             />
           </div>
           {loader ? (
-            <button
-              type="button"
-              className="w-full bg-tropicalIndigo text-white text-sm font-semibold py-2 rounded-md border border-transparent flex items-center justify-center hover:bg-transparent hover:border-tropicalIndigo hover:text-tropicalIndigo transition-all ease-in-out duration-300 gap-1"
-            >
+            <div className="w-full bg-tropicalIndigo text-white text-sm font-semibold py-2 rounded-md border border-transparent flex items-center justify-center hover:bg-transparent hover:border-tropicalIndigo hover:text-tropicalIndigo transition-all ease-in-out duration-300 gap-1">
               <FaArrowRotateRight className="animate-spin" />
               Logging
-            </button>
+            </div>
           ) : (
             <button
+              aria-label="Login"
               type="submit"
               className="w-full bg-tropicalIndigo text-white text-sm font-semibold py-2 rounded-md border border-transparent hover:bg-transparent hover:border-tropicalIndigo hover:text-tropicalIndigo transition-all ease-in-out duration-300"
             >

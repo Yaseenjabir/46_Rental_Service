@@ -41,7 +41,7 @@ export default async function ServiceList() {
           backgroundSize: "cover",
         }}
       >
-        <h1 className="absolute top-10 left-1/2 transform -translate-x-1/2 text-white text-4xl">
+        <h1 className="absolute text-nowrap top-10 left-1/2 transform -translate-x-1/2 text-white text-4xl">
           More Ideas
         </h1>
         <Link

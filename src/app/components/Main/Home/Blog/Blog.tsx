@@ -57,17 +57,18 @@ export default async function Blog() {
                   className="w-full rounded-t-lg"
                 />
 
-                <div className="bg-white py-3 px-5 flex flex-col gap-4 rounded-b-xl shadow-lg">
+                <div className="bg-white py-3 px-5 flex flex-col gap-3 rounded-b-xl shadow-lg">
                   <h4 className="font-semibold text-gray-600">
                     {formatDistanceToNow(item._createdAt)} ago
                   </h4>
-                  <h1 className="font-bold text-tropicalIndigo text-2xl cursor-pointer h-[70px]">
-                    <Link href={`/blog/${item.slug}`}>
-                      {truncateText(item.title, 45)}
-                    </Link>
-                  </h1>
-                  <p className="text-gray-600 h-[255px]">
-                    {truncateText(item.summary, 350)}
+                  <Link
+                    href={`/blog/${item.slug}`}
+                    className="font-bold text-tropicalIndigo text-xl cursor-pointer"
+                  >
+                    {truncateText(item.title, 45)}
+                  </Link>
+                  <p className="text-gray-600">
+                    {truncateText(item.summary, 250)}
                   </p>
                 </div>
               </div>

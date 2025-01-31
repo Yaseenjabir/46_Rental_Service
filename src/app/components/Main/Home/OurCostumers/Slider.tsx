@@ -71,7 +71,7 @@ export default function SliderComp() {
                     {yellowStars}
                     {grayStars}
                   </div>
-                  <p className="text-gray-600 italic tracking-wide h-[265px]">
+                  <p className="text-gray-600 italic tracking-wide h-[265px] overflow-hidden">
                     {truncateText(item.review, 450)}
                   </p>
                   <div className="flex flex-col items-center justify-center">

@@ -123,27 +123,23 @@ export default function Footer() {
                   <div className="w-full md:w-[50%] lg:w-[33%] flex flex-col items-center justify-center md:items-start py-5 lg:py-0 gap-5 text-sm">
                     <h4 className="text-headings font-semibold ">CONTACT US</h4>
                     <p className=" w-[200px] text-tropicalIndigo text-center md:text-start">
-                      Hamsa A Building, Office 610, M Floor Al Karama - Dubai
+                      Lootah building First floor 114 Alnahda street Al Qusais 2
                     </p>
                     <div className="flex flex-col gap-2">
                       <p className="flex items-center justify-center gap-1 md:justify-start">
                         <span className="text-gray-600 font-semibold">
                           Call & Whatsapp :{" "}
                         </span>
-                        <span className="text-tropicalIndigo">XXXXXXXXXXX</span>
-                      </p>
-                      <p className="flex items-center justify-center gap-1 md:justify-start">
-                        <span className="text-gray-600 font-semibold">
-                          Office Landline :{" "}
+                        <span className="text-tropicalIndigo">
+                          +971521143801
                         </span>
-                        <span className="text-tropicalIndigo">XXXXXXXXXXX</span>
                       </p>
                       <p className="flex items-center justify-center gap-1 md:justify-start">
                         <span className="text-gray-600 font-semibold text-nowrap">
                           Costumer Support :{" "}
                         </span>
                         <span className="text-tropicalIndigo">
-                          xyz@gmail.com
+                          Info@threebtransport.com
                         </span>
                       </p>
                     </div>

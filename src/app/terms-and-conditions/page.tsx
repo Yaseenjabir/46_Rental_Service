@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 export default function TermsAndConditions() {
   return (
     <>
@@ -96,3 +98,9 @@ export default function TermsAndConditions() {
     </>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Terms and Conditions | 3B Transport LLC",
+  description:
+    "Read the terms and conditions of using the services provided by 3B Transport LLC, including guidelines on bookings, cancellations, and responsibilities.",
+};

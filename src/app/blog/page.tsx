@@ -15,6 +15,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Metadata } from "next";
+import { formatDistanceToNow } from "date-fns";
+import { locations } from "../utils/utilInfo";
 
 interface BlogContentProps {
   posts: Post[];
@@ -85,15 +88,13 @@ function BlogContent({ posts, page, totalPages, category }: BlogContentProps) {
           <DropdownMenuContent>
             <DropdownMenuLabel>Filter by Category</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link href={`/blog?page=1&category=Sharjah`}>Sharjah</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href={`/blog?page=1&category=Dubai`}>Dubai</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href={`/blog?page=1`}>All</Link>
-            </DropdownMenuItem>
+            {locations.map((item) => (
+              <DropdownMenuItem key={item.value}>
+                <Link href={`/blog?page=1&category=${item.value}`}>
+                  {item.title}
+                </Link>
+              </DropdownMenuItem>
+            ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -125,7 +126,7 @@ function BlogContent({ posts, page, totalPages, category }: BlogContentProps) {
                   </div>
                   <div className="flex items-center gap-2">
                     <FaClock className=" text-blue-400 text-lg" />
-                    <span>11 months ago</span>
+                    <span>{formatDistanceToNow(item._createdAt)} ago</span>
                   </div>
                 </div>
                 <p className="text-gray-500">{item.summary}</p>
@@ -175,3 +176,9 @@ function BlogContent({ posts, page, totalPages, category }: BlogContentProps) {
     </section>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Blog | Travel Tips & Transportation Insights | 3B Transport LLC",
+  description:
+    "Stay updated with the latest travel tips, transportation insights, and news from 3B Transport LLC’s blog. Get expert advice for all your group travel needs across the UAE.",
+};

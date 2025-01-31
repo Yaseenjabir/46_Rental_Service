@@ -15,6 +15,34 @@ export async function generateStaticParams() {
   return data.map((item: Post) => ({ params: { slug: item.slug } }));
 }
 
+export async function generateMetaData({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+
+  const query = `*[_type == 'blog' && slug.current == "${slug}"]{
+    title,
+    summary,
+    _createdAt,
+      image,
+      content,
+      by->{
+        name,
+        about,
+        image
+      }
+  }[0]`;
+
+  const data: Post = await client.fetch(query);
+
+  return {
+    title: data.title,
+    description: data.summary,
+  };
+}
+
 export default async function Page({
   params,
 }: {

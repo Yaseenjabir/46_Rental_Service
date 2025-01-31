@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import BreadCrumbs from "../components/Main/BreadCrumbs/BreadCrumbs";
 
 export default function About() {
@@ -118,3 +119,9 @@ export default function About() {
     </>
   );
 }
+
+export const metadata: Metadata = {
+  title: "About Us | Trusted Bus Rental Services in UAE | 3B Transport LLC",
+  description:
+    "Learn about 3B Transport LLC’s mission, values, and story. Discover how we provide reliable, safe, and affordable bus rental services for diverse transportation needs across the UAE.",
+};

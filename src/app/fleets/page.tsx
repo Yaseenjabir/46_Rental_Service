@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation"; // Use useSearchParams for query params
+import { useSearchParams } from "next/navigation";
 import BreadCrumbs from "../components/Main/BreadCrumbs/BreadCrumbs";
 import {
   Accordion,
@@ -16,7 +16,9 @@ import Image from "next/image";
 import { RangeSlider } from "rsuite";
 import { FaFilter } from "react-icons/fa";
 import FleetsList from "../components/Main/Fleets/FleetsList";
-import { brands, Vehicle, vehicleTypes } from "../utils/utils";
+import { Vehicle } from "../utils/utils";
+import Loader from "../utils/Loader";
+import { brands, ProjectVehicleTypes } from "../utils/utilInfo";
 
 function Fleets() {
   const [value, setValue] = useState([0, 700]);
@@ -25,25 +27,23 @@ function Fleets() {
   const [searchTerm, setSearchTerm] = useState(""); // For vehicle title search
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-  const [location, setLocation] = useState(""); // Separate state for location
+  const [location, setLocation] = useState("");
+  const [loader, setLoader] = useState(true);
 
-  const searchParams = useSearchParams(); // Access query parameters
+  const searchParams = useSearchParams();
 
-  // Filter by vehicle type
   const handleTypeChange = (id: string) => {
     setSelectedTypes((prev) =>
       prev.includes(id) ? prev.filter((type) => type !== id) : [...prev, id]
     );
   };
 
-  // Filter by brand
   const handleBrandChange = (id: string) => {
     setSelectedBrands((prev) =>
       prev.includes(id) ? prev.filter((brand) => brand !== id) : [...prev, id]
     );
   };
 
-  // Price filter logic
   const filterByPrice = (vehicle: Vehicle) => {
     const { perHourRental, fullDayRental, airportTransfer, weeklyRental } =
       vehicle;
@@ -57,7 +57,6 @@ function Fleets() {
     return priceFits;
   };
 
-  // Filter vehicles by selected criteria
   const filterVehicles = () => {
     return data.filter((vehicle) => {
       const matchesType = selectedTypes.length
@@ -69,7 +68,7 @@ function Fleets() {
       const matchesPrice = filterByPrice(vehicle);
       const matchesLocation = location
         ? vehicle.location.toLowerCase().includes(location.toLowerCase())
-        : true; // Filter by location
+        : true;
       const matchesTitle = vehicle.name
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
@@ -84,7 +83,6 @@ function Fleets() {
     });
   };
 
-  // Handle query params change and filter based on them
   useEffect(() => {
     const locationParam = searchParams && searchParams.get("location");
     const brand = searchParams && searchParams.get("brand");
@@ -92,21 +90,19 @@ function Fleets() {
     const minPrice = searchParams && searchParams.get("minPrice");
     const maxPrice = searchParams && searchParams.get("maxPrice");
 
-    // Set the filters based on query params
-    if (locationParam) setLocation(locationParam); // Use location for location filter
+    if (locationParam) setLocation(locationParam);
     if (brand) setSelectedBrands(brand.split(","));
     if (vehicleType) setSelectedTypes(vehicleType.split(","));
     if (minPrice && maxPrice) setValue([Number(minPrice), Number(maxPrice)]);
 
-    // Apply the filters immediately if query params are present
     const filtered = filterVehicles();
     setFilteredData(filtered);
   }, [searchParams, data]);
 
-  // Fetch the vehicles data from API
   useEffect(() => {
     async function fetchData() {
       try {
+        setLoader(true);
         const res = await fetch("/api/getAllVehicles");
 
         if (!res.ok) {
@@ -114,28 +110,26 @@ function Fleets() {
         }
         const data = await res.json();
         setData(data);
-        setFilteredData(data); // Initially show all vehicles
-      } catch (error) {
-        console.log(error);
+        setFilteredData(data);
+      } finally {
+        setLoader(false);
       }
     }
     fetchData();
   }, []);
 
-  // Handle Filter click (manual filtering)
   const handleFilterClick = () => {
     const filtered = filterVehicles();
     setFilteredData(filtered);
   };
 
-  // Handle Clear Filters click (reset filters)
   const clearFilters = () => {
     setSelectedTypes([]);
     setSelectedBrands([]);
     setValue([0, 700]);
     setSearchTerm("");
-    setLocation(""); // Clear location as well
-    setFilteredData(data); // reset filtered data to all vehicles
+    setLocation("");
+    setFilteredData(data);
   };
 
   return (
@@ -158,8 +152,8 @@ function Fleets() {
                 <Input
                   placeholder="Type to search..."
                   className="outline-none focus:ring-0 border-none"
-                  value={searchTerm} // Bind input value to searchTerm
-                  onChange={(e) => setSearchTerm(e.target.value)} // Update searchTerm as the user types
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <IoSearch className="text-2xl text-gray-400 border-l w-10 cursor-pointer" />
               </div>
@@ -169,26 +163,26 @@ function Fleets() {
                 <h1 className="text-gray-600 font-semibold text-lg">
                   Vehicle Types
                 </h1>
-                <div className="w-full h-[200px] overflow-y-scroll">
-                  {vehicleTypes.map((item) => (
+                <div className="w-full h-[200px] overflow-y-auto">
+                  {ProjectVehicleTypes.map((item) => (
                     <div
-                      key={item.id}
+                      key={item.value}
                       className="flex items-center gap-3 my-1 text-gray-500 p-2 bg-slate-50"
                     >
                       <Checkbox
-                        id={item.id}
-                        onCheckedChange={() => handleTypeChange(item.id)}
+                        id={item.value}
+                        onCheckedChange={() => handleTypeChange(item.value)}
+                      />
+                      <Image
+                        src={item.img ? item.img : ""}
+                        width={35}
+                        height={15}
+                        alt="vehicle"
                       />
                       <label
-                        htmlFor={item.id}
+                        htmlFor={item.value}
                         className="text-sm font-medium leading-none"
                       >
-                        <Image
-                          src={item.img}
-                          width={35}
-                          height={15}
-                          alt="vehicle"
-                        />
                         {item.title}
                       </label>
                     </div>
@@ -202,15 +196,15 @@ function Fleets() {
                 <div className="w-full h-[200px] overflow-y-scroll">
                   {brands.map((item) => (
                     <div
-                      key={item.id}
+                      key={item.value}
                       className="flex items-center gap-3 my-1 text-gray-500 p-2 bg-slate-50"
                     >
                       <Checkbox
-                        id={item.id}
-                        onCheckedChange={() => handleBrandChange(item.id)}
+                        id={item.value}
+                        onCheckedChange={() => handleBrandChange(item.value)}
                       />
                       <label
-                        htmlFor={item.id}
+                        htmlFor={item.value}
                         className="text-sm font-medium leading-none"
                       >
                         {item.title}
@@ -235,7 +229,8 @@ function Fleets() {
               </div>
               {/* Filter Button */}
               <button
-                onClick={handleFilterClick} // Filter logic is applied here
+                aria-label="Filter"
+                onClick={handleFilterClick}
                 className="w-full bg-tropicalIndigoLight rounded py-3 text-white mt-5 font-semibold text-lg flex items-center justify-center gap-2 border border-tropicalIndigoLight hover:bg-transparent hover:text-tropicalIndigo transition-all ease-in-out duration-300"
               >
                 <FaFilter className="text-sm" />
@@ -251,7 +246,15 @@ function Fleets() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-        <FleetsList data={filteredData} />
+        {loader ? (
+          <Loader width={20} height={20} boxSize={100} />
+        ) : filteredData.length === 0 ? (
+          <p className="text-headings font-semibold text-2xl md:mt-3">
+            Sorry no data available
+          </p>
+        ) : (
+          <FleetsList data={filteredData} />
+        )}
       </main>
     </>
   );

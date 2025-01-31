@@ -5,11 +5,26 @@ import { FaMapLocationDot } from "react-icons/fa6";
 import { FaLocationArrow } from "react-icons/fa";
 import { BsFillSuitcaseLgFill } from "react-icons/bs";
 import { MdCelebration } from "react-icons/md";
-export default function RentalList() {
+import { client } from "@/sanity/lib/client";
+import Link from "next/link";
+
+interface Res {
+  belongsTo: string;
+  slug: string;
+}
+
+export default async function RentalList() {
+  const query = `*[_type == 'services']{
+  "slug" : slug.current,
+    belongsTo
+}`;
+
+  const res: Res[] = await client.fetch(query);
+
   return (
     <section className="py-10 min-h-[1000px] px-5 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
       <div
-        className={`w-full py-14 px-5 flex text-center hover:bg-[#006400] hover:text-white items-center justify-center flex-col text-gray-700 bg-slate-100 border-b-[3px] border-b-[#006400] rounded-xl group transition-all ease-in-out duration-300`}
+        className={`w-full py-14 px-5 flex text-center hover:bg-[#006400] hover:text-white items-center justify-start flex-col text-gray-700 bg-slate-100 border-b-[3px] border-b-[#006400] rounded-xl group transition-all ease-in-out duration-300`}
       >
         <div
           className={`h-20 w-20 bg-green-200 group-hover:bg-white flex items-center justify-center`}
@@ -25,16 +40,17 @@ export default function RentalList() {
             Dubai? You dont need to search more as you landed on the right site.
             Al Weam Bus Rental Dubai has been working in the market for almost
           </p>
-          <h3
+          <Link
+            href={`/services/${res.find((item) => item.belongsTo === "Hourly, Daily, Weekly, Monthly Rentals")?.slug}`}
             className={`font-semibold text-[#006400] group-hover:text-white flex items-center justify-center gap-1 cursor-pointer hover:underline`}
           >
             Hourly, Daily, Weekly, Monthly Rentals
             <MdArrowRightAlt className="text-2xl" />
-          </h3>
+          </Link>
         </div>
       </div>
       <div
-        className={`w-full py-14 px-5 flex text-center hover:bg-[#dd8f3c] hover:text-white items-center justify-center flex-col text-gray-700 bg-slate-100 border-b-[3px] border-b-[#dd8f3c] rounded-xl group transition-all ease-in-out duration-300`}
+        className={`w-full py-14 px-5 flex text-center hover:bg-[#dd8f3c] hover:text-white items-center justify-start flex-col text-gray-700 bg-slate-100 border-b-[3px] border-b-[#dd8f3c] rounded-xl group transition-all ease-in-out duration-300`}
       >
         <div
           className={`h-20 w-20 bg-[#dd8f3c56] group-hover:bg-white flex items-center justify-center`}
@@ -49,16 +65,17 @@ export default function RentalList() {
             expected. Al Weam Bus Rental Dubai is one of the leading
             transportation
           </p>
-          <h3
+          <Link
+            href={`/services/${res.find((item) => item.belongsTo === "Dubai Airport & Hotel Rentals")?.slug}`}
             className={`font-semibold text-[#dd8f3c] group-hover:text-white flex items-center justify-center gap-1 cursor-pointer hover:underline`}
           >
             Dubai Airport & Hotel Rentals
             <MdArrowRightAlt className="text-2xl" />
-          </h3>
+          </Link>
         </div>
       </div>
       <div
-        className={`w-full py-14 px-5 flex text-center hover:bg-[#2A3D66] hover:text-white items-center justify-center flex-col text-gray-700 bg-slate-100 border-b-[3px] border-b-[#2A3D66] rounded-xl group transition-all ease-in-out duration-300`}
+        className={`w-full py-14 px-5 flex text-center hover:bg-[#2A3D66] hover:text-white items-center justify-start flex-col text-gray-700 bg-slate-100 border-b-[3px] border-b-[#2A3D66] rounded-xl group transition-all ease-in-out duration-300`}
       >
         <div
           className={`h-20 w-20 bg-[#2a3d6646] group-hover:bg-white flex items-center justify-center`}
@@ -73,16 +90,17 @@ export default function RentalList() {
             &amp; tourism. Travelers and tourists worldwide visit Dubai once a
             year
           </p>
-          <h3
+          <Link
+            href={`/services/${res.find((item) => item.belongsTo === "Dubai and Abu Dhabi City Tours")?.slug}`}
             className={`font-semibold text-[#2A3D66] group-hover:text-white flex items-center justify-center gap-1 cursor-pointer hover:underline`}
           >
             Dubai and Abu Dhabi City Tours
             <MdArrowRightAlt className="text-2xl" />
-          </h3>
+          </Link>
         </div>
       </div>
       <div
-        className={`w-full py-14 px-5 flex text-center hover:bg-[#ec4e56] hover:text-white items-center justify-center flex-col text-gray-700 bg-slate-100 border-b-[3px] border-b-[#ec4e56] rounded-xl group transition-all ease-in-out duration-300`}
+        className={`w-full py-14 px-5 flex text-center hover:bg-[#ec4e56] hover:text-white items-center justify-start flex-col text-gray-700 bg-slate-100 border-b-[3px] border-b-[#ec4e56] rounded-xl group transition-all ease-in-out duration-300`}
       >
         <div
           className={`h-20 w-20 bg-[#9e2a303b] group-hover:bg-white flex items-center justify-center`}
@@ -96,16 +114,17 @@ export default function RentalList() {
             one of the leading bus rental companies in Dubai. Hire a vehicle in
             Dubai we provide all kinds of transfers inside Dubai covering all...
           </p>
-          <h3
+          <Link
+            href={`/services/${res.find((item) => item.belongsTo === "Point To Point Bus Rentals")?.slug}`}
             className={`font-semibold text-[#ec4e56] group-hover:text-white flex items-center justify-center gap-1 cursor-pointer hover:underline`}
           >
             Point To Point Bus Rentals
             <MdArrowRightAlt className="text-2xl" />
-          </h3>
+          </Link>
         </div>
       </div>
       <div
-        className={`w-full py-14 px-5 flex text-center hover:bg-[#4A2C7C] hover:text-white items-center justify-center flex-col text-gray-700 bg-slate-100 border-b-[3px] border-b-[#4A2C7C] rounded-xl group transition-all ease-in-out duration-300`}
+        className={`w-full py-14 px-5 flex text-center hover:bg-[#4A2C7C] hover:text-white items-center justify-start flex-col text-gray-700 bg-slate-100 border-b-[3px] border-b-[#4A2C7C] rounded-xl group transition-all ease-in-out duration-300`}
       >
         <div
           className={`h-20 w-20 bg-[#4b2c7c6c] group-hover:bg-white flex items-center justify-center`}
@@ -122,16 +141,17 @@ export default function RentalList() {
             in the ranking of best bus rental companies in Dubai. We offer
             great,...
           </p>
-          <h3
+          <Link
+            href={`/services/${res.find((item) => item.belongsTo === "Corporate Transportation Rentals")?.slug}`}
             className={`font-semibold text-[#4A2C7C] group-hover:text-white flex items-center justify-center gap-1 cursor-pointer hover:underline`}
           >
             Corporate Transportation Rentals
             <MdArrowRightAlt className="text-2xl" />
-          </h3>
+          </Link>
         </div>
       </div>
       <div
-        className={`w-full py-14 px-5 flex text-center hover:bg-pink-500 hover:text-white items-center justify-center flex-col text-gray-700 bg-slate-100 border-b-[3px] border-b-pink-500 rounded-xl group transition-all ease-in-out duration-300`}
+        className={`w-full py-14 px-5 flex text-center hover:bg-pink-500 hover:text-white items-center justify-start flex-col text-gray-700 bg-slate-100 border-b-[3px] border-b-pink-500 rounded-xl group transition-all ease-in-out duration-300`}
       >
         <div
           className={`h-20 w-20 bg-pink-200 group-hover:bg-white flex items-center justify-center`}
@@ -146,12 +166,13 @@ export default function RentalList() {
             comprehensive insights on wedding transportation, from choosing the
             right v...
           </p>
-          <h3
+          <Link
+            href={`/services/${res.find((item) => item.belongsTo === "Weddings & Events Rentals")?.slug}`}
             className={`font-semibold text-pink-500 group-hover:text-white flex items-center justify-center gap-1 cursor-pointer hover:underline`}
           >
             Weddings & Events Rentals
             <MdArrowRightAlt className="text-2xl" />
-          </h3>
+          </Link>
         </div>
       </div>
     </section>

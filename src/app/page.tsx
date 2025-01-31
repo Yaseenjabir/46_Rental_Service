@@ -1,6 +1,7 @@
 import BestRentalService from "./components/Main/Home/BestRentalService/BestRentalService";
 import Blog from "./components/Main/Home/Blog/Blog";
 import Brands from "./components/Main/Home/Brands/Brands";
+import CEOMessage from "./components/Main/Home/CEOMessage/CEOMessage";
 import FindServicesNearby from "./components/Main/Home/FindServicesNearby/FindServicesNearby";
 import HeroSection from "./components/Main/Home/HeroSection/HeroSection";
 import OurCostumer from "./components/Main/Home/OurCostumers/OurCostumers";
@@ -11,7 +12,7 @@ import TopTransportCompany from "./components/Main/Home/TopTransportCompany/TopT
 export default function Home() {
   return (
     <>
-      <main className="bg-ghostWhite w-full flex flex-col items-center justify-center">
+      <main className="w-full flex flex-col items-center justify-center">
         <HeroSection />
         <div className="w-full max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px]">
           <FindServicesNearby />
@@ -20,6 +21,7 @@ export default function Home() {
           <Stats />
           <TopTransportCompany />
           <OurCostumer />
+          <CEOMessage />
           <Brands />
           <Blog />
         </div>

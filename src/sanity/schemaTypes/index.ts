@@ -5,7 +5,8 @@ import { Vehicle } from "./Vehicle";
 import { Location } from "./Location";
 import { Contact } from "./Contact";
 import { Review } from "./Review";
+import { Services } from "./Services";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [Blog, User, Vehicle, Location, Contact, Review],
+  types: [Blog, User, Vehicle, Location, Contact, Review, Services],
 };

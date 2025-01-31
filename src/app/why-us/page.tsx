@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 export default function WhyChooseUs() {
   return (
     <>
@@ -83,3 +85,9 @@ export default function WhyChooseUs() {
     </>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Why Choose Us | 3B Transport LLC",
+  description:
+    "Discover why 3B Transport LLC is the best choice for reliable, safe, and affordable bus rental services in the UAE. Learn about our customer-centric approach and exceptional fleet.",
+};

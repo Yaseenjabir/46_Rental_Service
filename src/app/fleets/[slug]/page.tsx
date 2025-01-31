@@ -16,6 +16,7 @@ import { MdOutlineSevereCold } from "react-icons/md";
 import { Vehicle } from "@/app/utils/utils";
 import { PortableText } from "next-sanity";
 import FleetForm from "../../components/Main/Fleets/FleetForm";
+import { client } from "@/sanity/lib/client";
 
 async function fetchData(query: string) {
   const res = await fetch(
@@ -24,6 +25,27 @@ async function fetchData(query: string) {
   const data = await res.json();
 
   return data;
+}
+
+export async function generateStaticParams() {
+  const query = `*[_type == 'vehicle']{
+  "slug" : slug.current
+  }`;
+
+  const res = await client.fetch(query);
+
+  return res.map((item) => ({ params: { slug: item.slug } }));
+}
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+
+  const data: Vehicle = await fetchData(slug);
+
+  return {
+    title: `${data.name} | Bus Rental Services in UAE | 3B Transport LLC`,
+    description: `Discover the details of the ${data.name} vehicle, including its specifications, services, pricing, and more. Rent this vehicle for your transportation needs in the UAE.`,
+  };
 }
 
 export default async function Page({ params }) {

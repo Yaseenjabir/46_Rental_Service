@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 export default function PrivacyPolicy() {
   return (
     <>
@@ -85,3 +87,9 @@ export default function PrivacyPolicy() {
     </>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | 3B Transport LLC",
+  description:
+    "Learn about how 3B Transport LLC collects, uses, and protects your personal data. Our privacy policy explains the measures we take to ensure your privacy and security.",
+};

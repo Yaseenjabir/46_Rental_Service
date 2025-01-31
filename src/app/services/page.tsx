@@ -1,6 +1,13 @@
 import React from "react";
 import BreadCrumbs from "../components/Main/BreadCrumbs/BreadCrumbs";
 import RentalList from "../components/Main/Home/RentalPartner/RentalList";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Bus Rental Services in the UAE | 3B Transport LLC",
+  description:
+    "Discover 3B Transport LLC's diverse range of bus rental services for corporate events, school trips, weddings, airport transfers, and more. Reliable, safe, and comfortable transportation solutions across the UAE.",
+};
 
 export default function Services() {
   return (

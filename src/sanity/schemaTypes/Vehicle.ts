@@ -1,3 +1,4 @@
+import { locations, vehicleTypes, brands } from "@/app/utils/utilInfo";
 import { defineField, defineType } from "sanity";
 
 const years = [
@@ -37,20 +38,6 @@ export const Vehicle = defineType({
       name: "name",
       title: "Vehicle Name",
       type: "string",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "company",
-      title: "Select the company",
-      type: "string",
-      options: {
-        list: [
-          { title: "Daewoo", value: "daewoo" },
-          { title: "Yutong", value: "yutong" },
-          { title: "Express", value: "express" },
-        ],
-        layout: "dropdown",
-      },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -149,17 +136,6 @@ export const Vehicle = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "slug",
-      type: "slug",
-      title: "Slug",
-      options: {
-        source: "name",
-        maxLength: 96,
-      },
-      description: "Please click to generate slug",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: "perHourRental",
       type: "number",
       title: "Per Hour Rental",
@@ -183,48 +159,49 @@ export const Vehicle = defineType({
       title: "Weekly Rental",
       validation: (Rule) => Rule.required(),
     }),
+    // Vehicle Type
     defineField({
       name: "vehicleType",
       type: "string",
       title: "Vehicle Type",
       options: {
-        list: [
-          { title: "Minivan", value: "minivan" },
-          { title: "Sedan", value: "sedan" },
-          { title: "Suv", value: "suv" },
-          { title: "Van", value: "van" },
-          { title: "Bus", value: "bus" },
-        ],
+        list: vehicleTypes,
       },
       validation: (Rule) => Rule.required(),
     }),
+    // Brand
     defineField({
       name: "brand",
       type: "string",
       title: "Brand",
       options: {
-        list: [
-          { title: "BMW", value: "bmw" },
-          { title: "Ford", value: "ford" },
-          { title: "Honda", value: "honda" },
-          { title: "Nissan", value: "nissan" },
-        ],
+        list: brands,
         layout: "dropdown",
       },
       validation: (Rule) => Rule.required(),
     }),
+    // Location
     defineField({
       name: "location",
       title: "Car Location",
       type: "string",
       options: {
-        list: [
-          { title: "Dubai", value: "Dubai" },
-          { title: "Sharjah", value: "Sharjah" },
-        ],
+        list: locations,
       },
       description:
         "Please select the location where your car services are available",
+      validation: (Rule) => Rule.required(),
+    }),
+    // Slug
+    defineField({
+      name: "slug",
+      type: "slug",
+      title: "Slug",
+      options: {
+        source: "name",
+        maxLength: 96,
+      },
+      description: "Please click to generate slug",
       validation: (Rule) => Rule.required(),
     }),
   ],

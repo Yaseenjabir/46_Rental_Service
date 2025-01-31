@@ -1,4 +1,4 @@
-import { companyLocation, companyName } from "@/app/utils/utils";
+import { companyName } from "@/app/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { MdArrowRightAlt } from "react-icons/md";
@@ -16,18 +16,18 @@ export default function HeroSection() {
         <div className="w-full h-full max-w-[720px] py-5 px-5 flex flex-col gap-10 items-center justify-center lg:flex-row lg:max-w-[1000px] xl:max-w-[1180px] xl:py-14">
           <div className="w-full flex flex-col h-full">
             <h1 className="text-center font-bold text-2xl leading-7 mx-auto text-tropicalIndigo mb-2 md:text-start md:text-[26px] lg:text-3xl">
-              Dubai Top Leading Bus Rental Company: Minibuses to Luxury Coaches
+              Top Bus Rental Service in Dubai: Affordable Minibuses, Coaches &
+              Luxury Vehicles for Every Occasion
             </h1>
             <p className="text-gray-700 tracking-wide">
-              Are you looking for a bus rental {companyLocation} service?
-              {companyName} is the right bus rental company to lead the way to
-              luxury buses, minibuses, coasters, vans and sedans rentals in
-              Dubai. We specialize in providing the cheapest bus rental rates
-              for high-quality rental services. Our persistent and reliable bus
-              rental services are the key factor for success. We do provide bus
-              rental {companyLocation} services for travelers, tourists,
-              corporates, or for any special events on a daily, hourly, weekly,
-              and monthly basis.
+              Looking for reliable bus rental services in Dubai? {companyName}
+              offers a wide range of vehicles including luxury coaches,
+              minibuses, coasters, vans, and sedans at the most competitive
+              rates. Whether you are a tourist, corporate traveler, or planning
+              a special event, we provide flexible rental options on a daily,
+              hourly, weekly, or monthly basis. Our premium, cost-effective bus
+              rental services are designed to ensure a smooth and enjoyable
+              experience for all types of groups and occasions.
             </p>
             <Link
               href="/fleets"

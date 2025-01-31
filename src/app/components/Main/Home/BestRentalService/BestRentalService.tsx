@@ -12,7 +12,7 @@ export default function BestRentalService() {
             <IoShieldSharp className="text-5xl" />
           </div>
           <div className="flex flex-col justify-start">
-            <h4 className="mb-1 font-medium text-center">Safety First</h4>
+            <h1 className="mb-1 font-medium text-center">Safety First</h1>
             <p>
               Safety and comfortability in a secure environment for all our
               passengers is our top priority which makes us the best bus rental
@@ -27,7 +27,7 @@ export default function BestRentalService() {
           <div className="bg-white p-8 text-tropicalIndigo mb-7 rounded-full shadow-md">
             <IoDiamond className="text-5xl" />
           </div>
-          <h4 className="mb-1 font-medium">Luxury Vehicles</h4>
+          <h1 className="mb-1 font-medium">Luxury Vehicles</h1>
           <p>
             Our high-end fleet of buses offers unparalleled comfort and fashion
             providing all our passengers with luxurious travel experience. We
@@ -40,7 +40,7 @@ export default function BestRentalService() {
           <div className="bg-white p-8 text-tropicalIndigo mb-7 rounded-full shadow-md">
             <MdOutlineNotes className="text-5xl" />
           </div>
-          <h4 className="mb-1 font-medium">Transparent Rules</h4>
+          <h1 className="mb-1 font-medium">Transparent Rules</h1>
           <p>
             Accomplishing greatness includes open information entrances,
             easy-to-understand communication, consultation processes, complaints
@@ -54,9 +54,9 @@ export default function BestRentalService() {
           <div className="bg-white p-8 text-tropicalIndigo mb-7 rounded-full shadow-md">
             <FaCar className="text-5xl" />
           </div>
-          <h4 className="mb-1 font-medium">
+          <h1 className="mb-1 font-medium">
             Chauffeur Service in {companyLocation}
-          </h4>
+          </h1>
           <p>
             Our chauffeur services prioritize your safety and convenience,
             providing you with skilled, licensed drivers who are knowledgeable

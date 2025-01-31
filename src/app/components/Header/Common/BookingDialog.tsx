@@ -30,14 +30,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { FaWhatsapp } from "react-icons/fa6";
+import { FaArrowRotateRight, FaWhatsapp } from "react-icons/fa6";
 import { MdOutlineMail } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import { companyName } from "@/app/utils/utils";
+import { useToast } from "@/hooks/use-toast";
 
 export default function BookingDialog({ showDialog, setShowDialog, data }) {
   const pathName = usePathname();
 
+  const { toast } = useToast();
   useEffect(() => {
     if (data) {
       const names = data.map((item: { name: string }) => item.name);
@@ -46,6 +48,7 @@ export default function BookingDialog({ showDialog, setShowDialog, data }) {
   }, [data]);
 
   const [carEnums, setCarEnums] = useState<string[]>([]);
+  const [loader, setLoader] = useState(false);
 
   const carEnumValues = carEnums.length > 0 ? carEnums : ["defaultCar"];
 
@@ -79,7 +82,10 @@ export default function BookingDialog({ showDialog, setShowDialog, data }) {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>, e: React.FormEvent) {
+  async function onSubmit(
+    values: z.infer<typeof formSchema>,
+    e: React.FormEvent
+  ) {
     const submitter = (e.nativeEvent as SubmitEvent)
       .submitter as HTMLButtonElement;
 
@@ -114,22 +120,52 @@ export default function BookingDialog({ showDialog, setShowDialog, data }) {
       const phoneNumber = process.env.NEXT_PUBLIC_ADMIN_PHONE_NUMBER;
       const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
       window.open(whatsappLink, "_blank");
-      form.reset({
-        carName: data[0].name,
-        guestName: "",
-        email: "",
-        serviceType: "perHourRental",
-        pickupLocation: "",
-        pickupDate: new Date(),
-        pickupTime: "",
-        remarks: "",
-        contact: "+971",
-        passengers: "1",
-        child: "1",
-      });
-      if (setShowDialog) {
-        setShowDialog(false);
+    }
+    if (action === "email") {
+      setLoader(true);
+      try {
+        const res = await fetch("/api/sendEmail", {
+          method: "POST",
+          body: JSON.stringify({
+            name: values?.carName,
+            guestName: values.guestName,
+            contact: values.contact,
+            location: values.pickupLocation,
+            date: formattedDate,
+            time: values.pickupTime,
+            remarks: values.remarks ? values.remarks : "None",
+            email: values.email,
+          }),
+        });
+        if (!res.ok) {
+          throw new Error("Something went wrong");
+        }
+
+        toast({
+          description: "Your mail has been sent successfully",
+        });
+      } catch (error) {
+        toast({
+          description: error.message,
+        });
+      } finally {
+        setLoader(false);
       }
+    }
+    form.reset({
+      guestName: "",
+      email: "",
+      serviceType: "perHourRental",
+      pickupLocation: "",
+      pickupDate: new Date(),
+      pickupTime: "",
+      remarks: "",
+      contact: "+971",
+      passengers: "1",
+      child: "1",
+    });
+    if (setShowDialog) {
+      setShowDialog(false);
     }
   }
 
@@ -285,13 +321,13 @@ export default function BookingDialog({ showDialog, setShowDialog, data }) {
                 )}
               />
             </div>
-            <div className="flex items-center justify-between gap-10 w-full">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10 w-full">
               {/* Pickup Location  */}
               <FormField
                 control={form.control}
                 name="pickupLocation"
                 render={({ field }) => (
-                  <FormItem className="w-[45%]">
+                  <FormItem className="md:w-[45%]">
                     <FormLabel>Pickup Location</FormLabel>
                     <FormControl>
                       <Input
@@ -309,12 +345,13 @@ export default function BookingDialog({ showDialog, setShowDialog, data }) {
                 control={form.control}
                 name="pickupDate"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col w-[45%] space-y-4 ">
+                  <FormItem className="flex flex-col md:w-[45%] space-y-4 ">
                     <FormLabel>Pickup Date</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
+                            aria-label="Calendar"
                             variant={"outline"}
                             className={cn(
                               "pl-3 text-left font-normal",
@@ -387,6 +424,7 @@ export default function BookingDialog({ showDialog, setShowDialog, data }) {
 
             <div className="flex flex-col gap-3">
               <Button
+                aria-label="Reserve and book now"
                 name="action"
                 value="whatsapp"
                 type="submit"
@@ -395,15 +433,26 @@ export default function BookingDialog({ showDialog, setShowDialog, data }) {
                 <FaWhatsapp />
                 Reserve and book now
               </Button>
-              <Button
-                name="action"
-                value="email"
-                type="submit"
-                className="bg-tropicalIndigo py-4 hover:bg-headings w-full flex items-center justify-center gap-1"
-              >
-                <MdOutlineMail />
-                Reserve and book with email
-              </Button>
+              {loader ? (
+                <div
+                  aria-label="Submitting"
+                  className="bg-tropicalIndigo py-2 rounded-md text-sm font-semibold text-white hover:bg-headings w-full flex items-center justify-center gap-1"
+                >
+                  <FaArrowRotateRight className="animate-spin" />
+                  Submiting...
+                </div>
+              ) : (
+                <Button
+                  aria-label="Reserve and book with email"
+                  name="action"
+                  value="email"
+                  type="submit"
+                  className="bg-tropicalIndigo py-4 hover:bg-headings w-full flex items-center justify-center gap-1"
+                >
+                  <MdOutlineMail />
+                  Reserve and book with email
+                </Button>
+              )}
             </div>
           </form>
         </Form>

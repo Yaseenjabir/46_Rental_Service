@@ -91,9 +91,8 @@ const ContactUs = () => {
       setLoading(true);
       await client.create(modifiedValues);
     } catch (error) {
-      console.log(error);
       toast({
-        description: error.message,
+        description: "Something went wrong",
       });
     } finally {
       setLoading(false);
@@ -108,7 +107,7 @@ const ContactUs = () => {
 
   return (
     <section className="bg-white w-full">
-      <section className="w-full py-10 px-10 max-w-[700px] lg:max-w-[960px] xl:max-w-[1140px] mx-auto md:mb-10 md:px-0">
+      <section className="w-full py-10 px-5 max-w-[700px] lg:max-w-[960px] xl:max-w-[1140px] mx-auto md:mb-10 md:px-0">
         {/* Contact us description  */}
         <div className="text-titleColor flex flex-col gap-2 md:py-10 md:px-0 lg:gap-3 xl:gap-5">
           <h1 className="text-4xl font-light lg:text-5xl lg:text-titleColor md:font-medium lg:font-light">
@@ -126,7 +125,7 @@ const ContactUs = () => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-8 w-full flex flex-col items-center justify-center px-5 h-full"
+              className="space-y-8 w-full flex flex-col py-5 items-center justify-center px-5 h-full"
             >
               <FormField
                 control={form.control}
@@ -231,15 +230,16 @@ const ContactUs = () => {
                 )}
               />
               {loading ? (
-                <Button
-                  className="bg-tropicalIndigo w-full border border-tropicalIndigo hover:text-tropicalIndigo hover:bg-transparent hover:border-tropicalIndigo"
-                  type="button"
+                <div
+                  aria-label="Submitting"
+                  className="bg-tropicalIndigo w-full border border-tropicalIndigo hover:text-tropicalIndigo hover:bg-transparent text-white flex items-center justify-center gap-2 text-sm rounded-lg py-2 hover:border-tropicalIndigo"
                 >
-                  <FaArrowRotateRight className="animate-spin" />
+                  <FaArrowRotateRight className="animate-spin text-lg" />
                   Submitting
-                </Button>
+                </div>
               ) : (
                 <Button
+                  aria-label="Submit"
                   className="bg-tropicalIndigo w-full border border-tropicalIndigo hover:text-tropicalIndigo hover:bg-transparent hover:border-tropicalIndigo"
                   type="submit"
                 >
