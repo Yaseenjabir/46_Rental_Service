@@ -6,18 +6,10 @@ import Loader from "../utils/Loader";
 import { Suspense } from "react";
 import { Post } from "../utils/utils";
 import { urlFor } from "@/sanity/lib/image";
-import { IoFilterSharp } from "react-icons/io5";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
-import { locations } from "../utils/utilInfo";
+
+import Filter from "./Filter";
 
 interface BlogContentProps {
   posts: Post[];
@@ -79,24 +71,8 @@ function BlogContent({ posts, page, totalPages, category }: BlogContentProps) {
     <section className="w-full max-w-[720px] lg:max-w-[900px] py-10 px-5">
       <div className="w-full flex items-center justify-between">
         <h1 className="text-xl text-gray-500">Blog</h1>
-
         {/* Dropdown for Filters */}
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <IoFilterSharp className="text-xl cursor-pointer" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>Filter by Category</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            {locations.map((item) => (
-              <DropdownMenuItem key={item.value}>
-                <Link href={`/blog?page=1&category=${item.value}`}>
-                  {item.title}
-                </Link>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Filter />
       </div>
 
       {/* Blog Posts */}

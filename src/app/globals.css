@@ -54,7 +54,7 @@ body {
 
 /* Blockquotes */
 .section-portable blockquote {
-  border-left: 4px solid #6046fa; /* Left border to highlight */
+  border-left: 4px solid #e11d48; /* Left border to highlight */
   padding-left: 1rem; /* Padding to the left */
   font-style: italic; /* Italicize text */
   color: #6b7280; /* Text color */
@@ -148,6 +148,10 @@ body {
   background-color: #fff4f2; /* Light red background */
   padding: 0.25rem 0.5rem; /* Padding */
   border-radius: 0.25rem; /* Rounded corners */
+}
+
+#boxShadow {
+  box-shadow: rgb(255, 255, 255) 0px -150px 36px -28px inset;
 }
 
 @layer base {

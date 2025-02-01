@@ -3,7 +3,7 @@ import { companyName } from "@/app/utils/utils";
 export default function Description() {
   return (
     <div className="text-center">
-      <p className="font-semibold text-tropicalIndigo px-5 mb-4">
+      <p className="font-semibold text-tropicalIndigo px-5 mb-4 text-justify">
         At {companyName}, you are not just a customer—you are our valued guest.
         We offer punctual airport transfers and seamless pickup services,
         ensuring you get to your sightseeing tours in comfort and style with the

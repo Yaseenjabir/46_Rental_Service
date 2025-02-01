@@ -2,7 +2,7 @@ import { companyLocation, companyName } from "@/app/utils/utils";
 
 export default function Description() {
   return (
-    <div className="flex flex-col gap-2 text-center max-w-[720px] lg:max-w-[980px] xl:max-w-[1160px]">
+    <div className="flex flex-col gap-2 text-center max-w-[720px] lg:max-w-[980px] xl:max-w-[1160px]text-justify">
       <h4 className="font-semibold text-tropicalIndigo px-5 text-sm">
         Top Bus Rental Services in {companyLocation}: Comfort, Safety &
         Affordable Luxury Coaches, Minibuses & More
@@ -11,7 +11,7 @@ export default function Description() {
         Find Nearby Bus Rental & Chauffeur Services in {companyLocation} for
         Convenient Travel
       </h1>
-      <p className="text-gray-600 tracking-wide text-start">
+      <p className="text-gray-600 tracking-wide text-justify">
         {companyName} is your top choice for dependable and affordable
         transportation services throughout {companyLocation} and the UAE. With a
         wide range of vehicles and experienced drivers available, we offer

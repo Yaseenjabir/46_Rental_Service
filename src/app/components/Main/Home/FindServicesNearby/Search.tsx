@@ -120,7 +120,7 @@ export default function Search() {
           <button
             onClick={() => form.handleSubmit(onSubmit)()}
             aria-label="Find"
-            className="rounded-full py-2 w-min px-4 pr-6 bg-ghostWhite flex items-center justify-center gap-2 font-semibold text-tropicalIndigo border border-transparent hover:border-gray-700 hover:bg-transparent hover:text-gray-700 transition-all ease-in-out duration-300"
+            className="rounded-full w-full py-2 px-4 pr-6 bg-ghostWhite flex items-center justify-center gap-2 font-semibold text-tropicalIndigo border border-transparent hover:border-gray-700 hover:bg-transparent hover:text-gray-700 transition-all ease-in-out duration-300"
           >
             <IoIosSearch className="text-2xl" />
             Find

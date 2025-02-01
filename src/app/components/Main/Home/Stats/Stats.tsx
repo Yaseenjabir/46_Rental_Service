@@ -74,7 +74,7 @@ export default function Stats() {
               ref={(el) => {
                 countersRef.current[0] = el;
               }}
-              data-end="4250"
+              data-end="1100"
             >
               0
             </strong>
@@ -89,7 +89,7 @@ export default function Stats() {
               ref={(el) => {
                 countersRef.current[1] = el;
               }}
-              data-end="67"
+              data-end="100"
             >
               0
             </strong>
@@ -119,7 +119,7 @@ export default function Stats() {
               ref={(el) => {
                 countersRef.current[3] = el;
               }}
-              data-end="15"
+              data-end="3"
             >
               0
             </strong>

@@ -191,7 +191,7 @@ For more details, visit: *${process.env.NEXT_PUBLIC_VERCEL_URL}/${item.slug}*
                           <FaCalendarAlt className="text-3xl" />
                         </div>
                         <div className="flex flex-col text-gray-600">
-                          <h1 className="font-semibold">Manufactured</h1>
+                          <h1 className="font-semibold">Built</h1>
                           <p className="text-sm">{item.manufactured}</p>
                         </div>
                       </div>
