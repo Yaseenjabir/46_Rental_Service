@@ -19,6 +19,7 @@ import FleetsList from "../components/Main/Fleets/FleetsList";
 import { Vehicle } from "../utils/utils";
 import Loader from "../utils/Loader";
 import { brands, ProjectVehicleTypes } from "../utils/utilInfo";
+import { useToast } from "@/hooks/use-toast";
 
 function Fleets() {
   const [value, setValue] = useState([0, 700]);
@@ -30,57 +31,67 @@ function Fleets() {
   const [location, setLocation] = useState("");
   const [loader, setLoader] = useState(true);
 
+  const { toast } = useToast();
+
   const searchParams = useSearchParams();
 
-  const handleTypeChange = (id: string) => {
-    setSelectedTypes((prev) =>
-      prev.includes(id) ? prev.filter((type) => type !== id) : [...prev, id]
+  const handleTypeChange = (value: string) => {
+    setSelectedTypes((prev: string[]) =>
+      prev.includes(value)
+        ? prev.filter((type) => value !== type)
+        : [...prev, value]
     );
   };
 
-  const handleBrandChange = (id: string) => {
-    setSelectedBrands((prev) =>
-      prev.includes(id) ? prev.filter((brand) => brand !== id) : [...prev, id]
+  const handleBrandChange = (value) => {
+    setSelectedBrands((prev: string[]) =>
+      prev.includes(value)
+        ? prev.filter((type) => type !== value)
+        : [...prev, value]
     );
-  };
-
-  const filterByPrice = (vehicle: Vehicle) => {
-    const { perHourRental, fullDayRental, airportTransfer, weeklyRental } =
-      vehicle;
-    const [minPrice, maxPrice] = value;
-
-    const priceFits =
-      (perHourRental >= minPrice && perHourRental <= maxPrice) ||
-      (fullDayRental >= minPrice && fullDayRental <= maxPrice) ||
-      (airportTransfer >= minPrice && airportTransfer <= maxPrice) ||
-      (weeklyRental >= minPrice && weeklyRental <= maxPrice);
-    return priceFits;
   };
 
   const filterVehicles = () => {
-    return data.filter((vehicle) => {
-      const matchesType = selectedTypes.length
+    return data.filter((vehicle: Vehicle) => {
+      const isTypeMatched = selectedTypes.length
         ? selectedTypes.includes(vehicle.vehicleType)
         : true;
-      const matchesBrand = selectedBrands.length
+
+      const isBrandMatched = selectedBrands.length
         ? selectedBrands.includes(vehicle.brand)
         : true;
-      const matchesPrice = filterByPrice(vehicle);
-      const matchesLocation = location
+
+      const isPriceInRange = filterByPrice(vehicle);
+
+      const isTitleMatches = searchTerm.length
+        ? vehicle.name.toLowerCase().includes(searchTerm.toLowerCase())
+        : true;
+      const isLocationMatched = location.length
         ? vehicle.location.toLowerCase().includes(location.toLowerCase())
         : true;
-      const matchesTitle = vehicle.name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
 
       return (
-        matchesType &&
-        matchesBrand &&
-        matchesPrice &&
-        matchesTitle &&
-        matchesLocation
+        isTypeMatched &&
+        isBrandMatched &&
+        isPriceInRange &&
+        isTitleMatches &&
+        isLocationMatched
       );
     });
+  };
+
+  const filterByPrice = (vehicle: Vehicle) => {
+    const { perHourRental, fullDayRental, weeklyRental, airportTransfer } =
+      vehicle;
+    const [minVal, maxVal] = value;
+
+    const priceFits =
+      (perHourRental >= minVal && perHourRental <= maxVal) ||
+      (fullDayRental >= minVal && fullDayRental <= maxVal) ||
+      (weeklyRental >= minVal && weeklyRental <= maxVal) ||
+      (airportTransfer >= minVal && airportTransfer <= maxVal);
+
+    return priceFits;
   };
 
   useEffect(() => {
@@ -119,6 +130,12 @@ function Fleets() {
   }, []);
 
   const handleFilterClick = () => {
+    if (!selectedTypes.length && !selectedBrands.length && !searchTerm.length) {
+      toast({
+        description: "Please select any brand,type or search for vehicle",
+      });
+      return;
+    }
     const filtered = filterVehicles();
     setFilteredData(filtered);
   };
