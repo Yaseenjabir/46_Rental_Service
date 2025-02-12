@@ -35,6 +35,8 @@ export default async function Blog({
 }) {
   const { page, category } = await searchParams;
 
+  console.log(category);
+
   const currentPage = parseInt(page as string) || 1;
   const limit = 4;
 

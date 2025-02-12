@@ -13,7 +13,7 @@ body {
 .section-portable h4,
 .section-portable h5,
 .section-portable h6 {
-  color: #6046fa; /* Heading color */
+  color: #c9261a; /* Heading color */
   font-weight: 700; /* Bold font */
   margin-top: 1.5rem; /* Space above */
   margin-bottom: 1rem; /* Space below */
@@ -29,13 +29,13 @@ body {
 
 /* Links */
 .section-portable a {
-  color: #1d4ed8; /* Link color */
+  color: #c9261a; /* Link color */
   text-decoration: underline; /* Underline links */
   transition: color 0.3s ease; /* Smooth transition for hover */
 }
 
 .section-portable a:hover {
-  color: #4c8bf5; /* Hover color for links */
+  color: #c9261a; /* Hover color for links */
   text-decoration: none; /* Remove underline on hover */
 }
 
@@ -227,7 +227,7 @@ body {
 
 /* Customize the thumb (the draggable part) */
 #scrollable-div::-webkit-scrollbar-thumb {
-  background-color: #6046fa; /* Green color for the thumb */
+  background-color: #c9261a; /* Green color for the thumb */
   border-radius: 10px; /* Rounded corners */
 }
 
@@ -239,7 +239,7 @@ body {
 
 /* Optional: Add hover effect to the scrollbar thumb */
 #scrollable-div::-webkit-scrollbar-thumb:hover {
-  background-color: #6046fa; /* Darker green when hovered */
+  background-color: #c9261a; /* Darker green when hovered */
 }
 
 #checking p {

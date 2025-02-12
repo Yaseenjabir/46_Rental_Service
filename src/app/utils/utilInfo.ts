@@ -10,6 +10,7 @@ export const vehicleTypes: Types[] = [
   { title: "Suv", value: "suv" },
   { title: "Van", value: "van" },
   { title: "Bus", value: "bus" },
+  { title: "Luxury Bus", value: "luxuryBus" },
 ];
 
 export const brands: Types[] = [
@@ -21,6 +22,9 @@ export const brands: Types[] = [
   { title: "Honda Odyssey", value: "hondaOdyssey" },
   { title: "Toyota Siana", value: "siana" },
   { title: "Mercedes S Class", value: "mercedes" },
+  { title: "Toyota", value: "toyota" },
+  { title: "Ashok Leyland", value: "ashokLeyland" },
+  { title: "Mitsubishi", value: "mitsubishi" },
 ];
 
 export const locations: Types[] = [

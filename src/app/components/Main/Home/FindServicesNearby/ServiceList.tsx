@@ -23,6 +23,10 @@ const query = `*[_type == "vehicle"][0..2] {
  manufactured,
  capacity,
  transmission,
+ perHourRental,
+ fullDayRental,
+ airportTransfer,
+ weeklyRental,
  "slug" : slug.current
 }`;
 export default async function ServiceList() {

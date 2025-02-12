@@ -64,6 +64,7 @@ export const Vehicle = defineType({
         list: [
           { title: "Auto", value: "auto" },
           { title: "Manual", value: "manual" },
+          { title: "Both", value: "both" },
         ],
         layout: "dropdown",
       },

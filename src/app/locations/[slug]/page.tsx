@@ -52,14 +52,18 @@ export default async function CityName({
   latitude,
   longitude,
   "vehicles": *[_type == "vehicle" && location == ^.locationType]{
-    vehicleType,
-    brand,
-    images[0],
-    name,
-    transmission,
-    manufactured,
-    capacity,
-    "slug" : slug.current
+  vehicleType,
+  brand,
+  images[0],
+  name,
+  transmission,
+  manufactured,
+  capacity,
+  perHourRental,
+  fullDayRental,
+  airportTransfer,
+  weeklyRental,
+  "slug" : slug.current
   }    
 }[0]
   `;

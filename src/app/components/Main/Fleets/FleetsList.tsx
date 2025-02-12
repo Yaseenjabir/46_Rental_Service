@@ -1,21 +1,19 @@
 "use client";
 import Image from "next/image";
-import { FaCalendarAlt, FaWhatsapp } from "react-icons/fa";
-import { PiInfoLight } from "react-icons/pi";
+import { FaWhatsapp } from "react-icons/fa";
 import { truncateText, Vehicle } from "@/app/utils/utils";
 import { urlFor } from "@/sanity/lib/image";
 import Link from "next/link";
 import { useState } from "react";
-import FleetForm from "./FleetForm";
+// import FleetForm from "./FleetForm";
 import { RxCross2 } from "react-icons/rx";
 import { usePathname } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { FaBuilding, FaUsers } from "react-icons/fa6";
-import { IoSettings } from "react-icons/io5";
+import { FaCar } from "react-icons/fa6";
 
 export default function FleetsList({ data }: { data: Vehicle[] }) {
   const [showDialog, setShowDialog] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<Vehicle>();
+  // const [selectedItem, setSelectedItem] = useState<Vehicle>();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
   const totalPages = Math.ceil(data.length / itemsPerPage); // Total number of pages
@@ -52,191 +50,75 @@ For more details, visit: *${process.env.NEXT_PUBLIC_VERCEL_URL}/${item.slug}*
         <div
           className={`w-full grid grid-cols-1 md:grid-cols-2 ${pathName === "/fleets" || pathName?.startsWith("/locations") ? "lg:grid-cols-2" : "lg:grid-cols-3"} gap-10 md:gap-5 `}
         >
-          {currentItems.map((item: Vehicle) => {
+          {currentItems.map((item: Vehicle, index: number) => {
             return (
-              <div key={item.slug}>
+              <div
+                key={index}
+                className="bg-red-500 text-gray-600 rounded-b-xl w-full"
+              >
                 <Image
-                  className="rounded-t-xl"
+                  className="rounded-t-xl max-h-[250px] min-h-[250px]"
                   src={urlFor(item.images).width(440).url()}
                   layout="responsive"
                   alt="bus-image"
-                  height={300}
+                  height={250}
                   width={440}
                 />
-
-                {/* <div className="bg-white p-7 text-gray-600 rounded-b-xl">
-                  <h1 className="text-gray-700 text-xl font-medium h-[65px]">
-                    <Link href={`/fleets/${item.slug}`}>
-                      {truncateText(item.name, 40)}
-                    </Link>
-                  </h1>
-                  <div className="mt-3">
-                    <h4 className="text-nowrap flex items-center">
-                      <PiHourglassLight className="text-lg mr-1" /> Per hour
-                      Rentals :
-                      <span className="font-semibold ml-1">
-                        {item.perHourRental} AED
+                <div className="bg-red-400 relative text-white px-5 w-full pt-14 pb-5 rounded-t-[50px] mt-10 flex flex-col gap-5">
+                  <div>
+                    <div className="flex items-center justify-start gap-2">
+                      <FaCar className="text-sm" />
+                      <span>
+                        {item.vehicleType.charAt(0).toUpperCase() +
+                          item.vehicleType.slice(1)}
                       </span>
-                    </h4>
-                    <h5 className="flex items-center gap-1">
-                      <CiClock2 className="text-lg" />
-                      Hours : 1*
-                    </h5>
-                  </div>
-                  <div className="mt-3">
-                    <h4 className="text-nowrap flex items-center">
-                      <LuCalendarDays className="text-lg mr-1" /> Full Day
-                      Rentals :
-                      <span className="font-semibold ml-1">
-                        {item.fullDayRental} AED
-                      </span>
-                    </h4>
-                    <h5 className="flex items-center gap-1">
-                      <CiClock2 className="text-lg" />
-                      Hours : 10*
-                    </h5>
-                  </div>
-                  <div className="mt-3">
-                    <h4 className="text-nowrap flex items-center">
-                      <IoAirplaneOutline className="text-lg mr-1" /> Airport
-                      Transfer :
-                      <span className="font-semibold ml-1">
-                        {item.airportTransfer} AED
-                      </span>
-                    </h4>
-                    <h5 className="flex items-center gap-1">
-                      <CiClock2 className="text-lg" />
-                      Hours : 2*
-                    </h5>
-                  </div>
-                  <div className="mt-3">
-                    <h4 className="text-nowrap flex items-center">
-                      <MdDirectionsCar className="text-lg mr-1" /> Weekly
-                      Rentals :
-                      <span className="font-semibold ml-1">
-                        {item.weeklyRental} AED
-                      </span>
-                    </h4>
-                    <h5 className="flex items-center gap-1">
-                      <CiClock2 className="text-lg" />
-                      Hours : 10*
-                    </h5>
-                  </div>
-                  <div className="mt-10 flex items-center justify-between">
-                    <button
-                      aria-label="Send Inquiry"
-                      onClick={() => {
-                        setSelectedItem(item);
-                        setShowDialog(true);
-                      }}
-                      className="rounded-full py-2 px-5 border hover:bg-black hover:text-white transition-all ease-in-out duration-300"
+                    </div>
+                    <Link
+                      href={`/fleets/${item.slug}`}
+                      className="font-semibold text-2xl hover:underline"
                     >
-                      Send Inquiry
-                    </button>
-                    <div className="flex text-2xl items-center gap-2">
-                      <Link
-                        href={`/fleets/${item.slug}`}
-                        aria-label="Go to vehicle-info page"
-                      >
-                        <PiInfoLight className="text-[43px] cursor-pointer text-gray-600 hover:animate-bounce" />
-                      </Link>
-                      <div
-                        aria-label="Redirect to whatsapp link"
-                        className="p-2 rounded-full bg-green-500 text-white hover:animate-bounce cursor-pointer"
-                      >
-                        <FaWhatsapp onClick={() => redirectToWhatsapp(item)} />
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
-
-                <div className="bg-white py-5 px-3 text-gray-600 rounded-b-xl w-full">
-                  <h1 className="text-gray-700 text-xl font-medium h-[65px]">
-                    <Link href={`/fleets/${item.slug}`}>
-                      {truncateText(item.name, 40)}
+                      {truncateText(item.name, 25)}
                     </Link>
-                  </h1>
-                  <div className="grid grid-cols-2 gap-y-5 ">
-                    <div className="text-tropicalIndigo">
-                      <div className="flex items-center justify-start gap-2">
-                        <div className="p-1 rounded-md border">
-                          <FaBuilding className="text-3xl" />
-                        </div>
-                        <div className="flex flex-col text-gray-600">
-                          <h1 className="font-semibold">Company</h1>
-                          <p className="text-sm">
-                            {item.brand.charAt(0).toUpperCase() +
-                              item.brand.slice(1)}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="text-tropicalIndigo">
-                      <div className="flex items-center justify-start gap-2">
-                        <div className="p-1 rounded-md border">
-                          <FaUsers className="text-3xl" />
-                        </div>
-                        <div className="flex flex-col text-gray-600">
-                          <h1 className="font-semibold">Capacity</h1>
-                          <p className="text-sm">
-                            {item.capacity.charAt(0).toUpperCase() +
-                              item.capacity.slice(1)}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="text-tropicalIndigo">
-                      <div className="flex items-center justify-start gap-2">
-                        <div className="p-1 rounded-md border">
-                          <FaCalendarAlt className="text-3xl" />
-                        </div>
-                        <div className="flex flex-col text-gray-600">
-                          <h1 className="font-semibold">Built</h1>
-                          <p className="text-sm">{item.manufactured}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="text-tropicalIndigo">
-                      <div className="flex items-center justify-start gap-2">
-                        <div className="p-1 rounded-md border">
-                          <IoSettings className="text-3xl" />
-                        </div>
-                        <div className="flex flex-col text-gray-600">
-                          <h1 className="font-semibold">Transmission</h1>
-                          <p className="text-sm">
-                            {" "}
-                            {item.transmission.charAt(0).toUpperCase() +
-                              item.transmission.slice(1)}
-                          </p>
-                        </div>
-                      </div>
+                    <div className="flex items-center justify-between">
+                      <p className="font-semibold">AED {item.weeklyRental}</p>
+                      <FaWhatsapp
+                        onClick={() => redirectToWhatsapp(item)}
+                        className="text-2xl cursor-pointer"
+                      />
                     </div>
                   </div>
-                  <div className="mt-10 flex items-center justify-between">
-                    <button
-                      aria-label="Send Inquiry"
-                      onClick={() => {
-                        setSelectedItem(item);
-                        setShowDialog(true);
-                      }}
-                      className="rounded-full w-full py-2 px-5 border hover:bg-black hover:text-white transition-all ease-in-out duration-300"
-                    >
-                      Send Inquiry
-                    </button>
-                    <div className="flex text-2xl items-center gap-2">
-                      <Link
-                        href={`/fleets/${item.slug}`}
-                        aria-label="Go to vehicle-info page"
-                      >
-                        <PiInfoLight className="text-[43px] cursor-pointer text-gray-600 hover:animate-bounce" />
-                      </Link>
-                      <div
-                        aria-label="Redirect to whatsapp link"
-                        className="p-2 rounded-full bg-green-500 text-white hover:animate-bounce cursor-pointer"
-                      >
-                        <FaWhatsapp onClick={() => redirectToWhatsapp(item)} />
-                      </div>
+                  <hr className="bg-black w-full" />
+                  <div className="flex items-center justify-between px-2">
+                    <div className="flex flex-col items-center">
+                      <span className="font-semibold">{item.manufactured}</span>
+                      <span>Built</span>
                     </div>
+                    <div className="flex flex-col items-center">
+                      <span className="font-semibold">{item.capacity}</span>
+                      <span>Seats</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <span className="font-semibold">
+                        {item.transmission.charAt(0).toUpperCase() +
+                          item.transmission.slice(1)}
+                      </span>
+                      <span>Transmission</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <span className="font-semibold">
+                        {item.airportTransfer}
+                      </span>
+                      <span>Rent</span>
+                    </div>
+                  </div>
+                  {/* Absolute div  */}
+                  <div className="absolute -top-6  mx-auto w-[90%] bg-white rounded-xl flex items-center justify-between p-5">
+                    <h1 className="text-red-500 font-semibold">
+                      {item.brand.charAt(0).toUpperCase() + item.brand.slice(1)}
+                    </h1>
+                    <span className="py-1 px-2 rounded-full bg-red-500 text-[10px] font-semibold">
+                      {item.manufactured}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -280,7 +162,7 @@ For more details, visit: *${process.env.NEXT_PUBLIC_VERCEL_URL}/${item.slug}*
           className={`fixed top-0 left-0 w-full h-full bg-[#000000ce] transition-all ease-in-out duration-300 z-30 flex flex-col items-center justify-center px-5 py-2 ${showDialog ? "visible" : "invisible"}`}
         >
           <div className="bg-white overflow-y-scroll py-2 px-3 rounded-md relative">
-            <FleetForm item={selectedItem} setShowDialog={setShowDialog} />
+            {/* <FleetForm item={selectedItem} setShowDialog={setShowDialog} /> */}
             <RxCross2
               onClick={() => setShowDialog(false)}
               className="absolute top-5 right-5 text-2xl text-gray-500 cursor-pointer"

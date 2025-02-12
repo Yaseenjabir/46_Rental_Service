@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import {
-  // Fira_Sans,
+  Fira_Sans,
+
   // Fira_Sans_Condensed,
   Geist,
   Geist_Mono,
-  Poppins,
+  // Poppins,
 } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header/Header";
@@ -19,19 +20,19 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-// const firaSans = Fira_Sans_Condensed({
-//   display: "swap",
-//   subsets: ["latin"],
-//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-//   adjustFontFallback: false,
-// });
-
-const poppins = Poppins({
+const firaSans = Fira_Sans({
   display: "swap",
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   adjustFontFallback: false,
 });
+
+// const poppins = Poppins({
+//   display: "swap",
+//   subsets: ["latin"],
+//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+//   adjustFontFallback: false,
+// });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -52,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${poppins.className} ${geistMono.variable} ${geistSans.variable} antialiased bg-ghostWhite text-black dark:bg-slate-800 dark:text-white`}
+        className={`${firaSans.className} ${geistMono.variable} ${geistSans.variable} antialiased bg-ghostWhite text-black dark:bg-slate-800 dark:text-white`}
       >
         <CustomProvider>
           <Header />
